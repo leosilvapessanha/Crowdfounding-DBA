@@ -1,0 +1,591 @@
+<html lang="en"><head><meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Design System — Unified Showcase</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="css2_2832c0ff631d.css" rel="stylesheet"/>
+<script src="resource_3fa48481346f.js"></script>
+<link href="css2_85279f51aca0.css" rel="stylesheet"/>
+<style>
+body{font-family:'Inter',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;margin:0}
+*,*::before,*::after{box-sizing:border-box}
+
+/* ── Animations ── */
+.animate-fade-in{animation:fadeIn .8s ease-out forwards;opacity:0}
+.animate-slide-up{animation:slideUp .8s ease-out forwards;opacity:0;transform:translateY(30px)}
+.animate-delay-200{animation-delay:.2s}
+.animate-delay-400{animation-delay:.4s}
+.animate-delay-600{animation-delay:.6s}
+.animate-delay-800{animation-delay:.8s}
+@keyframes fadeIn{to{opacity:1}}
+@keyframes slideUp{to{opacity:1;transform:translateY(0)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes pulse-glow{0%,100%{box-shadow:0 0 20px rgba(204,243,47,.3)}50%{box-shadow:0 0 40px rgba(204,243,47,.6)}}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+@keyframes orbit{from{transform:rotate(0deg) translateX(120px) rotate(0deg)}to{transform:rotate(360deg) translateX(120px) rotate(-360deg)}}
+@keyframes gradient-shift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes reveal-up{from{opacity:0;transform:translateY(60px)}to{opacity:1;transform:translateY(0)}}
+
+.float-anim{animation:float 4s ease-in-out infinite}
+.pulse-glow{animation:pulse-glow 3s ease-in-out infinite}
+.shimmer-bg{background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.08) 50%,transparent 100%);background-size:200% 100%;animation:shimmer 3s infinite}
+.gradient-shift-bg{background-size:300% 300%;animation:gradient-shift 8s ease infinite}
+
+/* ── Glass ── */
+.glass-panel{background:rgba(255,255,255,.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.glass-card{background:rgba(255,255,255,.08);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.15)}
+.glass-dark{background:rgba(0,0,0,.5);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.08)}
+
+/* ── DS helpers ── */
+.ds-section{padding:5rem 0;border-bottom:1px solid rgba(255,255,255,.08)}
+.ds-section:last-child{border-bottom:none}
+.ds-label{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.4);font-weight:600}
+.ds-swatch{width:80px;height:80px;border-radius:1rem;border:1px solid rgba(255,255,255,.1)}
+.ds-row{display:flex;align-items:center;justify-content:space-between;padding:1rem 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.ds-row:last-child{border-bottom:none}
+
+/* ── Transparent lettering ── */
+.text-outline{-webkit-text-stroke:1.5px rgba(255,255,255,.5);color:transparent}
+.text-outline-thick{-webkit-text-stroke:2px rgba(255,255,255,.7);color:transparent}
+
+/* ── Section bg particles ── */
+.section-glow{position:relative;overflow:hidden}
+.section-glow::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at 30% 40%,rgba(204,243,47,.06) 0%,transparent 50%),radial-gradient(circle at 70% 60%,rgba(99,102,241,.04) 0%,transparent 50%);pointer-events:none;z-index:0}
+
+/* ── Scroll reveal ── */
+.reveal{opacity:0;transform:translateY(40px);transition:all .7s cubic-bezier(.22,1,.36,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ── Button glow on hover ── */
+.btn-glow{position:relative;overflow:hidden;transition:all .3s ease}
+.btn-glow::after{content:'';position:absolute;inset:-2px;background:linear-gradient(135deg,rgba(204,243,47,.4),transparent,rgba(204,243,47,.2));border-radius:inherit;opacity:0;transition:opacity .3s;z-index:-1}
+.btn-glow:hover::after{opacity:1}
+
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:rgba(0,0,0,.2)}
+::-webkit-scrollbar-thumb{background:rgba(204,243,47,.3);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:rgba(204,243,47,.5)}
+</style>
+<link href="css2_9b8bf743d4a8.css" id="all-fonts-link-font-manrope" rel="stylesheet"/>
+<style>.font-manrope{font-family:'Manrope',sans-serif!important}</style>
+</head>
+<body class="bg-[#0a0a0f] text-white antialiased">
+
+<!-- ═══════════ NAVIGATION ═══════════ -->
+<nav class="fixed top-0 z-50 w-full glass-dark" style="background:rgba(10,10,15,.8);backdrop-filter:blur(20px)">
+<div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-[#ccf32f] flex items-center justify-center pulse-glow">
+<svg class="w-4 h-4 text-black" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+</div>
+<span class="text-lg font-medium tracking-tight">Design<span class="text-white/40">System</span></span>
+</div>
+<div class="hidden md:flex items-center gap-6 text-sm font-medium text-white/50">
+<a class="hover:text-[#ccf32f] transition-colors" href="#hero">Hero</a>
+<a class="hover:text-[#ccf32f] transition-colors" href="#typography">Typography</a>
+<a class="hover:text-[#ccf32f] transition-colors" href="#colors">Colors</a>
+<a class="hover:text-[#ccf32f] transition-colors" href="#components">Components</a>
+<a class="hover:text-[#ccf32f] transition-colors" href="#icons">Icons</a>
+<a class="hover:text-[#ccf32f] transition-colors" href="#motion">Motion</a>
+</div>
+</div>
+</nav>
+
+<!-- ═══════════ HERO SECTION ═══════════ -->
+<section id="hero" class="relative min-h-screen flex items-center overflow-hidden" style="background:linear-gradient(135deg,#0a0a0f 0%,#111118 30%,#0d0d14 70%,#0a0a0f 100%)">
+<!-- Animated background orbs -->
+<div class="absolute inset-0 pointer-events-none overflow-hidden">
+<div class="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full gradient-shift-bg opacity-20" style="background:radial-gradient(circle,rgba(204,243,47,.15),transparent 70%);filter:blur(80px)"></div>
+<div class="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full gradient-shift-bg opacity-15" style="background:radial-gradient(circle,rgba(99,102,241,.12),transparent 70%);filter:blur(60px);animation-delay:2s"></div>
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] rounded-full opacity-10" style="background:radial-gradient(circle,rgba(204,243,47,.2),transparent 60%);filter:blur(40px);animation:float 6s ease-in-out infinite"></div>
+<!-- Grid overlay -->
+<div class="absolute inset-0 opacity-[0.03]" style="background-image:linear-gradient(rgba(255,255,255,.1) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.1) 1px,transparent 1px);background-size:60px 60px"></div>
+<!-- Orbiting dots -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px]">
+<div class="absolute w-2 h-2 bg-[#ccf32f] rounded-full" style="animation:orbit 12s linear infinite;opacity:.4"></div>
+<div class="absolute w-1.5 h-1.5 bg-white rounded-full" style="animation:orbit 18s linear infinite reverse;opacity:.2"></div>
+</div>
+</div>
+<!-- Hero content -->
+<div class="max-w-7xl mx-auto px-6 pt-32 pb-20 relative z-10 w-full">
+<div class="grid lg:grid-cols-2 gap-16 items-center">
+<div>
+<!-- Badge -->
+<div class="inline-flex items-center gap-3 glass-card rounded-full px-5 py-2.5 mb-10 animate-slide-up">
+<span class="w-2 h-2 rounded-full bg-[#ccf32f] animate-pulse"></span>
+<span class="text-xs font-medium text-white/60 uppercase tracking-wider">Unified Design System v2.0</span>
+</div>
+<!-- Title with transparent lettering -->
+<h1 class="text-5xl md:text-7xl lg:text-8xl font-medium tracking-tight leading-[0.95] mb-8 animate-slide-up animate-delay-200 font-manrope">
+<span class="text-outline-thick block">Design</span>
+<span class="text-outline-thick block">System</span>
+<span class="block text-[#ccf32f]">Showcase.</span>
+</h1>
+<p class="text-lg text-white/50 max-w-lg mb-10 leading-relaxed animate-slide-up animate-delay-400">
+A comprehensive pattern library documenting all design tokens, components, animations, and interaction patterns — unified from four distinct design languages.
+</p>
+<!-- CTA Buttons -->
+<div class="flex flex-col sm:flex-row gap-4 animate-slide-up animate-delay-600">
+<a class="btn-glow inline-flex items-center justify-center gap-2 font-medium text-black bg-[#ccf32f] rounded-full px-8 py-4 hover:bg-[#d8f74d] transition-all hover:scale-105 hover:shadow-[0_0_30px_rgba(204,243,47,.4)]" href="#typography">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+Explore System
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+</a>
+<a class="inline-flex items-center justify-center gap-2 font-medium px-8 py-4 rounded-full glass-card hover:bg-white/10 transition-all" href="#components">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+View Components
+</a>
+</div>
+<!-- Stats row -->
+<div class="mt-12 flex flex-wrap items-center gap-8 animate-slide-up animate-delay-800">
+<div class="flex items-center gap-2"><div class="flex text-[#ccf32f]">★★★★★</div><span class="text-sm font-medium text-white/60">4.9/5</span></div>
+<div class="w-px h-6 bg-white/10"></div>
+<div class="flex items-center gap-2"><span class="text-sm font-medium text-white/60">4 Sources Unified</span></div>
+<div class="w-px h-6 bg-white/10"></div>
+<div class="flex items-center gap-2"><span class="text-sm font-medium text-white/60">50+ Tokens</span></div>
+</div>
+</div>
+<!-- Hero right: floating cards -->
+<div class="relative hidden lg:flex items-center justify-center min-h-[500px]">
+<!-- Main card -->
+<div class="absolute glass-card rounded-3xl p-8 w-72 float-anim" style="animation-delay:.5s">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 rounded-full bg-[#ccf32f]/20 flex items-center justify-center"><svg class="w-5 h-5 text-[#ccf32f]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 7h6v6M22 7l-8.5 8.5-5-5L2 17"/></svg></div>
+<div><p class="text-sm font-semibold">Portfolio Growth</p><p class="text-xs text-white/40">+247% avg gain</p></div>
+</div>
+<div class="flex gap-1 items-end h-16">
+<div class="w-1/5 bg-white/10 rounded-t h-[40%]"></div>
+<div class="w-1/5 bg-white/10 rounded-t h-[65%]"></div>
+<div class="w-1/5 bg-white/15 rounded-t h-[50%]"></div>
+<div class="w-1/5 bg-white/20 rounded-t h-[80%]"></div>
+<div class="w-1/5 bg-[#ccf32f] rounded-t h-[95%] shadow-[0_0_10px_rgba(204,243,47,.4)]"></div>
+</div>
+</div>
+<!-- Secondary floating card -->
+<div class="absolute top-0 right-0 glass-card rounded-2xl p-4 w-48 float-anim" style="animation-delay:1.5s">
+<div class="flex items-center gap-2 mb-2">
+<span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+<span class="text-[10px] uppercase font-semibold tracking-wide text-white/60">Live System</span>
+</div>
+<div class="text-2xl font-bold text-[#ccf32f]">12.5k</div>
+<div class="text-xs text-white/40">Active tokens</div>
+</div>
+<!-- Third floating card -->
+<div class="absolute bottom-10 left-0 glass-card rounded-2xl p-4 w-40 float-anim" style="animation-delay:2.5s">
+<div class="w-8 h-8 rounded-lg bg-[#ccf32f]/10 flex items-center justify-center mb-2">
+<svg class="w-4 h-4 text-[#ccf32f]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/><circle cx="12" cy="8" r="6"/></svg>
+</div>
+<div class="text-xs font-medium">Certified</div>
+<div class="text-[10px] text-white/40">Industry standard</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Scroll indicator -->
+<div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-fade-in" style="animation-delay:1.2s">
+<span class="text-[10px] uppercase tracking-widest text-white/30">Scroll</span>
+<div class="w-px h-8 bg-gradient-to-b from-white/30 to-transparent"></div>
+</div>
+</section>
+
+<!-- ═══════════ TYPOGRAPHY ═══════════ -->
+<section id="typography" class="ds-section section-glow max-w-7xl mx-auto px-6 relative z-10">
+<div class="reveal">
+<div class="flex items-center gap-3 mb-4"><div class="w-2 h-2 rounded-full bg-[#ccf32f]"></div><span class="ds-label text-[#ccf32f]">01</span></div>
+<h2 class="text-4xl md:text-6xl font-medium tracking-tight mb-4 font-manrope"><span class="text-outline">Typo</span>graphy</h2>
+<p class="text-white/40 mb-16 max-w-lg">Font families, scales, and text roles used across all design sources.</p>
+</div>
+<!-- Font families -->
+<div class="glass-card rounded-2xl p-8 mb-8 reveal">
+<h3 class="text-xl font-medium mb-6">Font Families</h3>
+<div class="grid md:grid-cols-3 gap-6">
+<div class="bg-white/5 rounded-xl p-6"><span class="ds-label">Primary</span><p class="text-2xl font-medium mt-2" style="font-family:Inter,sans-serif">Inter</p><p class="text-xs text-white/40 mt-1">400 · 500 · 600 · 700</p></div>
+<div class="bg-white/5 rounded-xl p-6"><span class="ds-label">Display</span><p class="text-2xl font-medium mt-2 font-manrope">Manrope</p><p class="text-xs text-white/40 mt-1">500 · 600 · tracking-tight</p></div>
+<div class="bg-white/5 rounded-xl p-6"><span class="ds-label">Alternate</span><p class="text-2xl font-medium mt-2" style="font-family:'Plus Jakarta Sans',sans-serif">Jakarta Sans</p><p class="text-xs text-white/40 mt-1">400 · 500 · 600</p></div>
+</div>
+</div>
+<!-- Type scale -->
+<div class="glass-card rounded-2xl p-8 reveal">
+<h3 class="text-xl font-medium mb-8">Type Scale</h3>
+<div class="ds-row"><div><span class="ds-label">H1 — Display</span><h1 class="text-4xl md:text-6xl lg:text-7xl font-medium tracking-tight leading-[1.1] font-manrope mt-2">Design System</h1></div><span class="text-xs text-white/30 font-mono whitespace-nowrap ml-4">36–72px / leading-[1.1]</span></div>
+<div class="ds-row"><div><span class="ds-label">H2 — Section</span><h2 class="text-3xl md:text-5xl font-medium tracking-tight mt-2">Section Title</h2></div><span class="text-xs text-white/30 font-mono whitespace-nowrap ml-4">30–48px / tracking-tight</span></div>
+<div class="ds-row"><div><span class="ds-label">H3 — Card Title</span><h3 class="text-2xl font-medium mt-2">Card Heading</h3></div><span class="text-xs text-white/30 font-mono whitespace-nowrap ml-4">24px / font-medium</span></div>
+<div class="ds-row"><div><span class="ds-label">H4 — Subtitle</span><h4 class="text-lg font-medium mt-2">Subtitle Text</h4></div><span class="text-xs text-white/30 font-mono whitespace-nowrap ml-4">18px / font-medium</span></div>
+<div class="ds-row"><div><span class="ds-label">Body Large</span><p class="text-xl text-white/70 leading-relaxed mt-2 max-w-md">Connecting learners to independent instructors across the platform.</p></div><span class="text-xs text-white/30 font-mono whitespace-nowrap ml-4">20px / leading-relaxed</span></div>
+<div class="ds-row"><div><span class="ds-label">Body — Regular</span><p class="text-base text-white/50 leading-relaxed mt-2">Standard body text for paragraphs and descriptions.</p></div><span class="text-xs text-white/30 font-mono whitespace-nowrap ml-4">16px / leading-relaxed</span></div>
+<div class="ds-row"><div><span class="ds-label">Caption</span><p class="text-sm text-white/40 mt-2">Small informational text and labels</p></div><span class="text-xs text-white/30 font-mono whitespace-nowrap ml-4">14px / text-white/40</span></div>
+<div class="ds-row"><div><span class="ds-label">Micro — Overline</span><p class="text-xs text-white/30 uppercase tracking-wider mt-2">STATUS LABEL</p></div><span class="text-xs text-white/30 font-mono whitespace-nowrap ml-4">12px / uppercase tracking-wider</span></div>
+<div class="ds-row"><div><span class="ds-label">Transparent Lettering</span><p class="text-5xl font-medium tracking-tight text-outline mt-2">Ghost Text</p></div><span class="text-xs text-white/30 font-mono whitespace-nowrap ml-4">-webkit-text-stroke / transparent</span></div>
+</div>
+</section>
+
+<!-- ═══════════ COLORS ═══════════ -->
+<section id="colors" class="ds-section section-glow max-w-7xl mx-auto px-6 relative z-10">
+<div class="reveal">
+<div class="flex items-center gap-3 mb-4"><div class="w-2 h-2 rounded-full bg-[#ccf32f]"></div><span class="ds-label text-[#ccf32f]">02</span></div>
+<h2 class="text-4xl md:text-6xl font-medium tracking-tight mb-4 font-manrope"><span class="text-outline">Color</span> System</h2>
+<p class="text-white/40 mb-16 max-w-lg">Hex, RGB, and semantic roles for every surface and state.</p>
+</div>
+<!-- Brand palette -->
+<div class="glass-card rounded-2xl p-8 mb-8 reveal">
+<h3 class="text-xl font-medium mb-8">Brand & Primary</h3>
+<div class="flex flex-wrap gap-6">
+<div class="text-center"><div class="ds-swatch bg-[#ccf32f]"></div><p class="text-xs text-white/50 mt-2">#ccf32f<br/>Accent</p></div>
+<div class="text-center"><div class="ds-swatch bg-[#bce325]"></div><p class="text-xs text-white/50 mt-2">#bce325<br/>Accent Hover</p></div>
+<div class="text-center"><div class="ds-swatch bg-black border border-white/10"></div><p class="text-xs text-white/50 mt-2">#000000<br/>Primary</p></div>
+<div class="text-center"><div class="ds-swatch bg-white"></div><p class="text-xs text-white/50 mt-2">#ffffff<br/>Background</p></div>
+<div class="text-center"><div class="ds-swatch bg-[#0a0a0f] border border-white/10"></div><p class="text-xs text-white/50 mt-2">#0a0a0f<br/>Dark BG</p></div>
+<div class="text-center"><div class="ds-swatch bg-[#cfddea]"></div><p class="text-xs text-white/50 mt-2">#cfddea<br/>Light BG</p></div>
+</div>
+</div>
+<!-- Neutrals -->
+<div class="glass-card rounded-2xl p-8 mb-8 reveal">
+<h3 class="text-xl font-medium mb-8">Neutrals</h3>
+<div class="flex flex-wrap gap-4">
+<div class="text-center"><div class="w-16 h-16 rounded-xl bg-neutral-50 border border-white/10"></div><p class="text-[10px] text-white/40 mt-1">50</p></div>
+<div class="text-center"><div class="w-16 h-16 rounded-xl bg-neutral-100"></div><p class="text-[10px] text-white/40 mt-1">100</p></div>
+<div class="text-center"><div class="w-16 h-16 rounded-xl bg-neutral-200"></div><p class="text-[10px] text-white/40 mt-1">200</p></div>
+<div class="text-center"><div class="w-16 h-16 rounded-xl bg-neutral-400"></div><p class="text-[10px] text-white/40 mt-1">400</p></div>
+<div class="text-center"><div class="w-16 h-16 rounded-xl bg-neutral-500"></div><p class="text-[10px] text-white/40 mt-1">500</p></div>
+<div class="text-center"><div class="w-16 h-16 rounded-xl bg-neutral-700"></div><p class="text-[10px] text-white/40 mt-1">700</p></div>
+<div class="text-center"><div class="w-16 h-16 rounded-xl bg-neutral-800"></div><p class="text-[10px] text-white/40 mt-1">800</p></div>
+<div class="text-center"><div class="w-16 h-16 rounded-xl bg-neutral-900 border border-white/10"></div><p class="text-[10px] text-white/40 mt-1">900</p></div>
+</div>
+</div>
+<!-- Semantic -->
+<div class="glass-card rounded-2xl p-8 mb-8 reveal">
+<h3 class="text-xl font-medium mb-8">Semantic & Feedback</h3>
+<div class="grid md:grid-cols-4 gap-6">
+<div><div class="h-20 rounded-xl bg-blue-600 mb-2 flex items-end p-3"><span class="text-xs text-white/80">Info</span></div><p class="text-xs text-white/40">#2563eb · bg-blue-600</p></div>
+<div><div class="h-20 rounded-xl bg-green-600 mb-2 flex items-end p-3"><span class="text-xs text-white/80">Success</span></div><p class="text-xs text-white/40">#16a34a · bg-green-600</p></div>
+<div><div class="h-20 rounded-xl bg-yellow-400 mb-2 flex items-end p-3"><span class="text-xs text-black/60">Warning</span></div><p class="text-xs text-white/40">#facc15 · bg-yellow-400</p></div>
+<div><div class="h-20 rounded-xl bg-orange-500 mb-2 flex items-end p-3"><span class="text-xs text-white/80">Accent Alt</span></div><p class="text-xs text-white/40">#f97316 · bg-orange-500</p></div>
+</div>
+</div>
+<!-- Gradients -->
+<div class="glass-card rounded-2xl p-8 reveal">
+<h3 class="text-xl font-medium mb-8">Gradients & Surfaces</h3>
+<div class="grid md:grid-cols-3 gap-6">
+<div><div class="h-24 rounded-xl mb-2" style="background:radial-gradient(circle at 10% 0%,#fed7aa,#fb923c)"></div><p class="text-xs text-white/40">Radial Orange CTA</p></div>
+<div><div class="h-24 rounded-xl mb-2" style="background:linear-gradient(135deg,rgba(204,243,47,.2),transparent)"></div><p class="text-xs text-white/40">Accent Glow</p></div>
+<div><div class="h-24 rounded-xl glass-card mb-2 shimmer-bg"></div><p class="text-xs text-white/40">Glass + Shimmer</p></div>
+</div>
+</div>
+</section>
+
+<!-- ═══════════ UI COMPONENTS ═══════════ -->
+<section id="components" class="ds-section section-glow max-w-7xl mx-auto px-6 relative z-10">
+<div class="reveal">
+<div class="flex items-center gap-3 mb-4"><div class="w-2 h-2 rounded-full bg-[#ccf32f]"></div><span class="ds-label text-[#ccf32f]">03</span></div>
+<h2 class="text-4xl md:text-6xl font-medium tracking-tight mb-4 font-manrope"><span class="text-outline">UI</span> Components</h2>
+<p class="text-white/40 mb-16 max-w-lg">Buttons, inputs, cards, navbars, badges, tooltips, and more — all with animations.</p>
+</div>
+
+<!-- Buttons -->
+<div class="glass-card rounded-2xl p-8 mb-8 reveal">
+<h3 class="text-xl font-medium mb-8">Buttons</h3>
+<div class="flex flex-wrap gap-4 items-center mb-8">
+<button class="btn-glow bg-[#ccf32f] hover:bg-[#d8f74d] text-black font-medium px-7 py-3.5 rounded-full transition-all hover:scale-105 hover:shadow-[0_0_30px_rgba(204,243,47,.4)] flex items-center gap-2">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+Accent CTA
+</button>
+<button class="bg-black text-white font-medium px-7 py-3.5 rounded-full hover:bg-neutral-800 transition-all hover:scale-105 flex items-center gap-2" style="box-shadow:0 2.8px 2.2px rgba(0,0,0,.034),0 6.7px 5.3px rgba(0,0,0,.048),0 12.5px 10px rgba(0,0,0,.06),0 22.3px 17.9px rgba(0,0,0,.072),0 100px 80px rgba(0,0,0,.12)">Primary Dark</button>
+<button class="glass-card font-medium px-8 py-4 rounded-full hover:bg-white/10 transition-all flex items-center gap-2">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+Ghost Button
+</button>
+<button class="font-medium px-7 py-3.5 rounded-full transition-all hover:scale-105 flex items-center gap-2" style="background:radial-gradient(circle at 10% 0%,#fed7aa,#fb923c);box-shadow:0 15px 25px -10px rgba(248,113,22,.7),inset 0 4px 8px rgba(253,230,138,.9),inset 0 -4px 8px rgba(249,115,22,.9)">
+<span class="text-sm font-medium tracking-tight text-zinc-900">Gradient CTA</span>
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M7 7h10v10M7 17 17 7"/></svg>
+</button>
+<button class="bg-neutral-800 hover:bg-neutral-700 text-white font-medium py-3 px-6 rounded-xl transition-colors text-sm">Secondary</button>
+</div>
+<div class="flex flex-wrap gap-4 items-center">
+<button class="bg-white text-black font-medium px-6 py-2 rounded-full text-sm hover:bg-gray-100 transition-all hover:shadow-md" style="box-shadow:0 2.8px 2.2px rgba(0,0,0,.034),0 6.7px 5.3px rgba(0,0,0,.048),0 100px 80px rgba(0,0,0,.12)">Small White</button>
+<button class="bg-white/20 backdrop-blur-sm rounded-full p-3 hover:bg-white/30 transition-colors">
+<svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+</button>
+<button class="w-full max-w-xs bg-black text-white font-medium px-8 py-4 rounded-xl hover:bg-neutral-800 transition-colors flex items-center justify-center gap-2">Full-width Submit <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+</div>
+</div>
+
+<!-- Inputs -->
+<div class="glass-card rounded-2xl p-8 mb-8 reveal">
+<h3 class="text-xl font-medium mb-8">Form Inputs</h3>
+<div class="grid md:grid-cols-3 gap-6 max-w-3xl">
+<div><label class="block text-sm font-medium text-white/70 mb-1">Text</label><input class="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 focus:border-[#ccf32f] focus:ring-0 outline-none transition-colors text-white placeholder-white/30" placeholder="Your name" type="text"/></div>
+<div><label class="block text-sm font-medium text-white/70 mb-1">Email</label><input class="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 focus:border-[#ccf32f] focus:ring-0 outline-none transition-colors text-white placeholder-white/30" placeholder="email@example.com" type="email"/></div>
+<div><label class="block text-sm font-medium text-white/70 mb-1">Select</label><select class="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 focus:border-[#ccf32f] outline-none transition-colors text-white"><option>Choose option</option><option>Option A</option><option>Option B</option></select></div>
+</div>
+</div>
+
+<!-- Cards -->
+<div class="glass-card rounded-2xl p-8 mb-8 reveal">
+<h3 class="text-xl font-medium mb-8">Cards</h3>
+<div class="grid md:grid-cols-3 gap-6">
+<!-- Glass card -->
+<div class="glass-card rounded-2xl p-6 hover:bg-white/10 transition-all hover:shadow-xl cursor-pointer group">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 rounded-full bg-[#ccf32f]/20 flex items-center justify-center"><svg class="w-5 h-5 text-[#ccf32f]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+<h4 class="font-semibold">Glass Card</h4>
+</div>
+<p class="text-sm text-white/50">Background blur with subtle border, hover elevation and glow.</p>
+</div>
+<!-- Dark card with glow -->
+<div class="bg-black rounded-2xl p-6 border border-white/5 relative overflow-hidden group hover:shadow-xl transition-all cursor-pointer">
+<div class="absolute top-0 right-0 w-32 h-32 bg-[#ccf32f] opacity-5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:opacity-10 transition-opacity"></div>
+<div class="relative z-10">
+<div class="w-12 h-12 rounded-full bg-[#ccf32f] text-black flex items-center justify-center mb-4"><svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+<h4 class="font-medium text-lg mb-2">Dark Card</h4>
+<p class="text-white/40 text-sm">Glow orb on hover, inset shadow effect.</p>
+</div>
+</div>
+<!-- Step card -->
+<div class="bg-white/5 rounded-2xl p-6 border border-white/5 hover:shadow-xl transition-all cursor-pointer group relative overflow-hidden">
+<span class="text-5xl font-medium text-[#ccf32f]/10 absolute -top-2 -right-2">1</span>
+<div class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center mb-4 group-hover:bg-[#ccf32f]/20 transition-colors"><svg class="w-5 h-5 text-[#ccf32f]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><path d="M12 18h.01"/></svg></div>
+<h4 class="font-medium mb-2">Step Card</h4>
+<p class="text-sm text-white/40">Numbered step with icon, ghost number overlay.</p>
+</div>
+</div>
+</div>
+
+<!-- Navbar demo -->
+<div class="glass-card rounded-2xl p-8 mb-8 reveal">
+<h3 class="text-xl font-medium mb-8">Navigation</h3>
+<div class="glass-card rounded-2xl p-4 flex items-center justify-between">
+<div class="flex items-center gap-2"><div class="w-6 h-6 rounded-full bg-[#ccf32f]"></div><span class="text-sm font-medium">Brand</span></div>
+<div class="flex items-center gap-6 text-sm font-medium text-white/50">
+<a class="hover:text-[#ccf32f] transition-colors cursor-pointer">Home</a>
+<a class="hover:text-[#ccf32f] transition-colors cursor-pointer">About</a>
+<a class="hover:text-[#ccf32f] transition-colors cursor-pointer">Pricing</a>
+</div>
+<button class="bg-[#ccf32f] text-black text-xs font-medium px-4 py-2 rounded-full hover:bg-[#d8f74d] transition-colors">Get Started</button>
+</div>
+</div>
+
+<!-- Badges & Tooltips -->
+<div class="glass-card rounded-2xl p-8 mb-8 reveal">
+<h3 class="text-xl font-medium mb-8">Badges, Pills & Tooltips</h3>
+<div class="flex flex-wrap gap-4 items-center mb-6">
+<span class="inline-flex items-center gap-2 bg-[#ccf32f]/10 text-[#ccf32f] px-3 py-1 rounded-full text-xs font-bold">● Live</span>
+<span class="inline-flex items-center gap-1 bg-green-500/10 text-green-400 px-3 py-1 rounded-full text-xs font-medium"><span class="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span>Audited</span>
+<span class="bg-white/10 text-white/60 px-3 py-1 rounded-full text-xs font-medium">Tag</span>
+<span class="bg-orange-500/10 text-orange-400 px-3 py-1 rounded-full text-xs font-bold">Homologado</span>
+<div class="inline-flex items-center bg-white/5 rounded-full pl-1.5 pr-4 py-1 gap-2">
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded-full bg-neutral-600 border-2 border-black"></div>
+<div class="w-6 h-6 rounded-full bg-neutral-500 border-2 border-black"></div>
+<div class="w-6 h-6 rounded-full bg-neutral-400 border-2 border-black"></div>
+</div>
+<span class="text-xs font-medium text-white/60"><span class="font-semibold text-white/80">12.5k</span> users</span>
+</div>
+<div class="flex items-center gap-1 text-[#ccf32f]">★★★★★ <span class="text-xs text-white/60 ml-1">4.9/5</span></div>
+</div>
+<!-- Tooltip demo -->
+<div class="flex gap-6">
+<div class="relative group cursor-pointer">
+<button class="bg-white/5 px-4 py-2 rounded-lg text-sm">Hover me</button>
+<div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-white text-black text-xs px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap shadow-lg">Tooltip text<div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-white rotate-45"></div></div>
+</div>
+</div>
+</div>
+
+<!-- Modal preview -->
+<div class="glass-card rounded-2xl p-8 reveal">
+<h3 class="text-xl font-medium mb-8">Modal Preview</h3>
+<div class="bg-black/40 rounded-2xl p-8 flex items-center justify-center min-h-[200px] relative">
+<div class="glass-card rounded-2xl p-8 w-full max-w-sm text-center">
+<div class="w-12 h-12 rounded-full bg-[#ccf32f]/20 flex items-center justify-center mx-auto mb-4"><svg class="w-6 h-6 text-[#ccf32f]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/><circle cx="12" cy="8" r="6"/></svg></div>
+<h4 class="text-lg font-medium mb-2">Achievement Unlocked</h4>
+<p class="text-sm text-white/40 mb-6">You've completed the design system review.</p>
+<div class="flex gap-3">
+<button class="flex-1 bg-white/5 hover:bg-white/10 font-medium py-2.5 rounded-xl transition-colors text-sm">Dismiss</button>
+<button class="flex-1 bg-[#ccf32f] hover:bg-[#bce325] text-black font-medium py-2.5 rounded-xl transition-colors text-sm">Continue</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ═══════════ ICONS ═══════════ -->
+<section id="icons" class="ds-section section-glow max-w-7xl mx-auto px-6 relative z-10">
+<div class="reveal">
+<div class="flex items-center gap-3 mb-4"><div class="w-2 h-2 rounded-full bg-[#ccf32f]"></div><span class="ds-label text-[#ccf32f]">04</span></div>
+<h2 class="text-4xl md:text-6xl font-medium tracking-tight mb-4 font-manrope"><span class="text-outline">Icon</span>ography</h2>
+<p class="text-white/40 mb-16 max-w-lg">Lucide icon set with size variants and color tokens.</p>
+</div>
+<div class="glass-card rounded-2xl p-8 mb-8 reveal">
+<h3 class="text-xl font-medium mb-8">Icon Set</h3>
+<div class="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-4">
+<div class="flex flex-col items-center gap-2 p-3 bg-white/5 rounded-xl hover:bg-white/10 transition-colors"><svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 7h6v6M22 7l-8.5 8.5-5-5L2 17"/></svg><span class="text-[10px] text-white/40">trending-up</span></div>
+<div class="flex flex-col items-center gap-2 p-3 bg-white/5 rounded-xl hover:bg-white/10 transition-colors"><svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg><span class="text-[10px] text-white/40">arrow-right</span></div>
+<div class="flex flex-col items-center gap-2 p-3 bg-white/5 rounded-xl hover:bg-white/10 transition-colors"><svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg><span class="text-[10px] text-white/40">zap</span></div>
+<div class="flex flex-col items-center gap-2 p-3 bg-white/5 rounded-xl hover:bg-white/10 transition-colors"><svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span class="text-[10px] text-white/40">users</span></div>
+<div class="flex flex-col items-center gap-2 p-3 bg-white/5 rounded-xl hover:bg-white/10 transition-colors"><svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/><circle cx="12" cy="8" r="6"/></svg><span class="text-[10px] text-white/40">award</span></div>
+<div class="flex flex-col items-center gap-2 p-3 bg-white/5 rounded-xl hover:bg-white/10 transition-colors"><svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg><span class="text-[10px] text-white/40">play-circle</span></div>
+<div class="flex flex-col items-center gap-2 p-3 bg-white/5 rounded-xl hover:bg-white/10 transition-colors"><svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><path d="M12 18h.01"/></svg><span class="text-[10px] text-white/40">smartphone</span></div>
+<div class="flex flex-col items-center gap-2 p-3 bg-white/5 rounded-xl hover:bg-white/10 transition-colors"><svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><span class="text-[10px] text-white/40">bell</span></div>
+<div class="flex flex-col items-center gap-2 p-3 bg-white/5 rounded-xl hover:bg-white/10 transition-colors"><svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 2v4M16 2v4"/><rect height="18" rx="2" width="18" x="3" y="4"/><path d="M3 10h18"/></svg><span class="text-[10px] text-white/40">calendar</span></div>
+<div class="flex flex-col items-center gap-2 p-3 bg-white/5 rounded-xl hover:bg-white/10 transition-colors"><svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span class="text-[10px] text-white/40">user</span></div>
+<div class="flex flex-col items-center gap-2 p-3 bg-white/5 rounded-xl hover:bg-white/10 transition-colors"><svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="text-[10px] text-white/40">map-pin</span></div>
+<div class="flex flex-col items-center gap-2 p-3 bg-white/5 rounded-xl hover:bg-white/10 transition-colors"><svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg><span class="text-[10px] text-white/40">shield-check</span></div>
+<div class="flex flex-col items-center gap-2 p-3 bg-white/5 rounded-xl hover:bg-white/10 transition-colors"><svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg><span class="text-[10px] text-white/40">search</span></div>
+<div class="flex flex-col items-center gap-2 p-3 bg-white/5 rounded-xl hover:bg-white/10 transition-colors"><svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 12h16M4 6h16M4 18h16"/></svg><span class="text-[10px] text-white/40">menu</span></div>
+<div class="flex flex-col items-center gap-2 p-3 bg-white/5 rounded-xl hover:bg-white/10 transition-colors"><svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg><span class="text-[10px] text-white/40">chevron-down</span></div>
+<div class="flex flex-col items-center gap-2 p-3 bg-white/5 rounded-xl hover:bg-white/10 transition-colors"><svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span class="text-[10px] text-white/40">lock</span></div>
+</div>
+</div>
+<!-- Icon sizes -->
+<div class="glass-card rounded-2xl p-8 mb-8 reveal">
+<h3 class="text-xl font-medium mb-8">Size Variants</h3>
+<div class="flex items-end gap-8">
+<div class="flex flex-col items-center gap-2"><svg class="w-3 h-3 text-[#ccf32f]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg><span class="text-[10px] text-white/30">12px</span></div>
+<div class="flex flex-col items-center gap-2"><svg class="w-4 h-4 text-[#ccf32f]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg><span class="text-[10px] text-white/30">16px</span></div>
+<div class="flex flex-col items-center gap-2"><svg class="w-5 h-5 text-[#ccf32f]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg><span class="text-[10px] text-white/30">20px</span></div>
+<div class="flex flex-col items-center gap-2"><svg class="w-6 h-6 text-[#ccf32f]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg><span class="text-[10px] text-white/30">24px</span></div>
+<div class="flex flex-col items-center gap-2"><svg class="w-8 h-8 text-[#ccf32f]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg><span class="text-[10px] text-white/30">32px</span></div>
+<div class="flex flex-col items-center gap-2"><svg class="w-10 h-10 text-[#ccf32f]/50" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg><span class="text-[10px] text-white/30">40px</span></div>
+</div>
+</div>
+<!-- Icon colors -->
+<div class="glass-card rounded-2xl p-8 reveal">
+<h3 class="text-xl font-medium mb-8">Color Tokens</h3>
+<div class="flex flex-wrap items-center gap-8">
+<div class="flex flex-col items-center gap-2 p-3 bg-white/5 rounded-xl"><svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg><span class="text-[10px] text-white/40">text-white</span></div>
+<div class="flex flex-col items-center gap-2 p-3 bg-white/5 rounded-xl"><svg class="w-6 h-6 text-[#ccf32f]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg><span class="text-[10px] text-white/40">text-accent</span></div>
+<div class="flex flex-col items-center gap-2 p-3 bg-white/5 rounded-xl"><svg class="w-6 h-6 text-white/40" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg><span class="text-[10px] text-white/40">text-muted</span></div>
+<div class="flex flex-col items-center gap-2 p-3 bg-white/5 rounded-xl"><svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg><span class="text-[10px] text-white/40">text-success</span></div>
+<div class="flex flex-col items-center gap-2 p-3 bg-white/5 rounded-xl"><svg class="w-6 h-6 text-orange-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg><span class="text-[10px] text-white/40">text-warning</span></div>
+<div class="flex flex-col items-center gap-2 p-3 bg-[#ccf32f] rounded-xl"><svg class="w-6 h-6 text-black" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg><span class="text-[10px] text-black/60">on accent</span></div>
+</div>
+</div>
+</section>
+
+<!-- ═══════════ ANIMATIONS & MOTION ═══════════ -->
+<section id="motion" class="ds-section section-glow max-w-7xl mx-auto px-6 pb-24 relative z-10">
+<div class="reveal">
+<div class="flex items-center gap-3 mb-4"><div class="w-2 h-2 rounded-full bg-[#ccf32f]"></div><span class="ds-label text-[#ccf32f]">05</span></div>
+<h2 class="text-4xl md:text-6xl font-medium tracking-tight mb-4 font-manrope"><span class="text-outline">Motion</span> & Anim.</h2>
+<p class="text-white/40 mb-16 max-w-lg">Entrance animations, hover interactions, background effects, and transitions.</p>
+</div>
+
+<!-- Entrance animations -->
+<div class="glass-card rounded-2xl p-8 mb-8 reveal">
+<h3 class="text-xl font-medium mb-8">Entrance Animations</h3>
+<div class="grid md:grid-cols-2 gap-6">
+<div class="bg-white/5 rounded-xl p-6">
+<p class="ds-label mb-4">animate-fade-in</p>
+<div class="animate-fade-in bg-[#ccf32f]/10 rounded-lg p-4 text-center text-sm" style="animation-iteration-count:infinite;animation-duration:2s;animation-direction:alternate">Fade In</div>
+</div>
+<div class="bg-white/5 rounded-xl p-6">
+<p class="ds-label mb-4">animate-slide-up</p>
+<div class="animate-slide-up bg-[#ccf32f]/10 rounded-lg p-4 text-center text-sm" style="animation-iteration-count:infinite;animation-duration:2s;animation-direction:alternate">Slide Up</div>
+</div>
+</div>
+</div>
+
+<!-- Delay cascade -->
+<div class="glass-card rounded-2xl p-8 mb-8 reveal">
+<h3 class="text-xl font-medium mb-8">Animation Delays (Cascade)</h3>
+<div class="space-y-3">
+<div class="bg-white/5 rounded-xl p-4 animate-slide-up" style="animation-iteration-count:infinite;animation-duration:3s;animation-direction:alternate"><span class="text-sm">delay-0 (0s)</span></div>
+<div class="bg-white/5 rounded-xl p-4 animate-slide-up animate-delay-200" style="animation-iteration-count:infinite;animation-duration:3s;animation-direction:alternate"><span class="text-sm">delay-200 (0.2s)</span></div>
+<div class="bg-white/5 rounded-xl p-4 animate-slide-up animate-delay-400" style="animation-iteration-count:infinite;animation-duration:3s;animation-direction:alternate"><span class="text-sm">delay-400 (0.4s)</span></div>
+<div class="bg-white/5 rounded-xl p-4 animate-slide-up animate-delay-600" style="animation-iteration-count:infinite;animation-duration:3s;animation-direction:alternate"><span class="text-sm">delay-600 (0.6s)</span></div>
+<div class="bg-white/5 rounded-xl p-4 animate-slide-up animate-delay-800" style="animation-iteration-count:infinite;animation-duration:3s;animation-direction:alternate"><span class="text-sm">delay-800 (0.8s)</span></div>
+</div>
+</div>
+
+<!-- Hover interactions -->
+<div class="glass-card rounded-2xl p-8 mb-8 reveal">
+<h3 class="text-xl font-medium mb-8">Hover Interactions</h3>
+<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="bg-white/5 rounded-xl p-6">
+<p class="ds-label mb-4">hover:scale-105 + glow</p>
+<button class="btn-glow bg-[#ccf32f] text-black font-medium px-6 py-3 rounded-full transition-all hover:scale-105 hover:shadow-[0_0_30px_rgba(204,243,47,.4)]">Hover Me</button>
+</div>
+<div class="bg-white/5 rounded-xl p-6">
+<p class="ds-label mb-4">hover:shadow-xl — Card</p>
+<div class="glass-card rounded-xl p-4 hover:shadow-xl hover:shadow-[#ccf32f]/5 transition-all cursor-pointer hover:bg-white/10"><p class="text-sm text-white/50">Hover card → elevation</p></div>
+</div>
+<div class="bg-white/5 rounded-xl p-6">
+<p class="ds-label mb-4">transition-colors — Links</p>
+<div class="flex gap-4">
+<a class="text-white/50 hover:text-[#ccf32f] transition-colors cursor-pointer text-sm font-medium">Link A</a>
+<a class="text-white/50 hover:text-white transition-colors cursor-pointer text-sm font-medium">Link B</a>
+</div>
+</div>
+<div class="bg-white/5 rounded-xl p-6">
+<p class="ds-label mb-4">Radial gradient button</p>
+<button class="font-medium px-5 py-2.5 rounded-full transition-all hover:scale-105 text-sm" style="background:radial-gradient(circle at 10% 0%,#fed7aa,#fb923c);box-shadow:0 10px 20px -8px rgba(248,113,22,.5)">Gradient Hover</button>
+</div>
+<div class="bg-white/5 rounded-xl p-6">
+<p class="ds-label mb-4">Float animation</p>
+<div class="w-12 h-12 bg-[#ccf32f]/20 rounded-xl flex items-center justify-center float-anim"><svg class="w-5 h-5 text-[#ccf32f]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+</div>
+<div class="bg-white/5 rounded-xl p-6">
+<p class="ds-label mb-4">Pulse glow</p>
+<div class="w-12 h-12 bg-[#ccf32f] rounded-full flex items-center justify-center pulse-glow"><svg class="w-5 h-5 text-black" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+</div>
+</div>
+</div>
+
+<!-- Background effects -->
+<div class="glass-card rounded-2xl p-8 mb-8 reveal">
+<h3 class="text-xl font-medium mb-8">Background Effects</h3>
+<div class="grid md:grid-cols-3 gap-6">
+<div class="relative h-40 rounded-xl overflow-hidden">
+<div class="absolute inset-0 shimmer-bg bg-white/5"></div>
+<div class="absolute inset-0 flex items-center justify-center"><span class="ds-label">Shimmer</span></div>
+</div>
+<div class="relative h-40 rounded-xl overflow-hidden">
+<div class="absolute inset-0 gradient-shift-bg" style="background:linear-gradient(135deg,rgba(204,243,47,.1),rgba(99,102,241,.1),rgba(204,243,47,.1));background-size:300% 300%"></div>
+<div class="absolute inset-0 flex items-center justify-center"><span class="ds-label">Gradient Shift</span></div>
+</div>
+<div class="relative h-40 rounded-xl overflow-hidden">
+<div class="absolute inset-0 opacity-[0.06]" style="background-image:linear-gradient(rgba(255,255,255,.2) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.2) 1px,transparent 1px);background-size:30px 30px"></div>
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-[#ccf32f] rounded-full opacity-10 blur-2xl"></div>
+<div class="absolute inset-0 flex items-center justify-center"><span class="ds-label">Grid + Glow</span></div>
+</div>
+</div>
+</div>
+
+<!-- Transitions spec -->
+<div class="glass-card rounded-2xl p-8 reveal">
+<h3 class="text-xl font-medium mb-8">Transition Tokens</h3>
+<div class="grid md:grid-cols-4 gap-4">
+<div class="bg-white/5 rounded-xl p-4 text-center"><p class="text-sm font-medium">transition-all</p><p class="text-[10px] text-white/30 mt-1">150ms ease</p></div>
+<div class="bg-white/5 rounded-xl p-4 text-center"><p class="text-sm font-medium">transition-colors</p><p class="text-[10px] text-white/30 mt-1">150ms ease</p></div>
+<div class="bg-white/5 rounded-xl p-4 text-center"><p class="text-sm font-medium">transition-transform</p><p class="text-[10px] text-white/30 mt-1">150ms ease</p></div>
+<div class="bg-white/5 rounded-xl p-4 text-center"><p class="text-sm font-medium">duration-700</p><p class="text-[10px] text-white/30 mt-1">700ms ease-out</p></div>
+</div>
+</div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="border-t border-white/5 py-12 section-glow">
+<div class="max-w-7xl mx-auto px-6 text-center relative z-10">
+<div class="flex items-center justify-center gap-3 mb-4">
+<div class="w-6 h-6 rounded-full bg-[#ccf32f] flex items-center justify-center pulse-glow"><svg class="w-3 h-3 text-black" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+<span class="text-sm font-medium tracking-tight">Design<span class="text-white/40">System</span></span>
+</div>
+<p class="text-xs text-white/30">Unified from 4 design sources · CryptoLearn · CONDOR · GenLabs · Academy</p>
+</div>
+</footer>
+
+<!-- ═══════════ SCROLL REVEAL JS ═══════════ -->
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+const reveals=document.querySelectorAll('.reveal');
+const observer=new IntersectionObserver((entries)=>{
+entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}})
+},{threshold:0.1,rootMargin:'0px 0px -50px 0px'});
+reveals.forEach(el=>observer.observe(el));
+// Smooth scroll for nav links
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'})})
+});
+});
+</script>
+</body></html>

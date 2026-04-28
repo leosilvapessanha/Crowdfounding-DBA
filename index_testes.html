@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Trama — Junte-se e Financie Destinos</title>
+  <meta name="description" content="Descubra e apoie projetos inovadores.">
+
+  <!-- Fonts: Inter & Manrope & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* CSS RESETS & BASE FROM DESIGN SYSTEM */
+    :root {
+      --primary-white: #ffffff;
+      --bg-subtle: #f8fafc;
+      --text-dark: #0f172a;
+      --text-muted: #64748b;
+      --accent: #2563eb;
+      --accent-light: rgba(37, 99, 235, 0.1);
+      --glass-bg: rgba(255, 255, 255, 0.7);
+      --glass-border: rgba(255, 255, 255, 0.5);
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      margin: 0;
+      background-color: var(--bg-subtle);
+      color: var(--text-dark);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    /* Typography */
+    .font-manrope { font-family: 'Manrope', sans-serif !important; }
+    .font-outfit { font-family: 'Outfit', sans-serif !important; }
+
+    /* ── Transparent Lettering (Light Theme) ── */
+    .text-outline-light {
+      -webkit-text-stroke: 1.5px rgba(15, 23, 42, 0.15);
+      color: transparent;
+    }
+    .text-outline-thick-light {
+      -webkit-text-stroke: 2px rgba(15, 23, 42, 0.2);
+      color: transparent;
+    }
+
+    /* ── Glassmorphism (Light) ── */
+    .glass-panel-light {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
+    }
+    .glass-card-light {
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.02);
+    }
+
+    /* ── Animations ── */
+    .animate-fade-in { animation: fadeIn 0.8s ease-out forwards; opacity: 0; }
+    .animate-slide-up { animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; transform: translateY(40px); }
+    .animate-delay-100 { animation-delay: 0.1s; }
+    .animate-delay-200 { animation-delay: 0.2s; }
+    .animate-delay-300 { animation-delay: 0.3s; }
+    .animate-delay-400 { animation-delay: 0.4s; }
+    .animate-delay-500 { animation-delay: 0.5s; }
+
+    @keyframes fadeIn { to { opacity: 1; } }
+    @keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+    @keyframes float-slow { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+    @keyframes pulse-glow-light { 
+      0%, 100% { box-shadow: 0 0 20px rgba(37, 99, 235, 0.2); } 
+      50% { box-shadow: 0 0 40px rgba(37, 99, 235, 0.4); } 
+    }
+    @keyframes shimmer-light {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    .float-anim { animation: float 6s ease-in-out infinite; }
+    .float-anim-slow { animation: float-slow 8s ease-in-out infinite; }
+    .pulse-glow { animation: pulse-glow-light 4s ease-in-out infinite; }
+    .shimmer-bg-light {
+      background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.8) 50%, transparent 100%);
+      background-size: 200% 100%;
+      animation: shimmer-light 3s infinite;
+    }
+
+    /* ── Section Backgrounds & Grid ── */
+    .bg-grid-light {
+      background-image: linear-gradient(rgba(15,23,42,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(15,23,42,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .bg-mesh-light {
+      background: 
+        radial-gradient(circle at 15% 50%, rgba(37, 99, 235, 0.05), transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(14, 165, 233, 0.05), transparent 25%);
+    }
+
+    /* ── UI Elements From DS ── */
+    .btn-hover-fx {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-hover-fx::after {
+      content: ''; position: absolute; inset: 0;
+      background: white; opacity: 0; transition: opacity 0.3s;
+    }
+    .btn-hover-fx:hover { transform: translateY(-2px); box-shadow: 0 10px 25px -5px rgba(37,99,235,0.2); }
+    .btn-hover-fx:hover::after { opacity: 0.1; }
+
+    /* Custom Input Search Focus Animation */
+    .ds-input-focus:focus-within {
+        border-color: #3b82f6; /* blue-500 */
+        box-shadow: 0 0 0 4px rgba(219, 234, 254, 1); /* ring-4 ring-blue-100 */
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased relative selection:bg-blue-500/20 selection:text-blue-900 flex flex-col min-h-screen">
+
+  <!-- ═══════════ NAVIGATION ═══════════ -->
+  <nav class="fixed top-0 z-50 w-full mt-3 md:mt-6 px-4 md:px-8 xl:px-[10%] 2xl:px-[256px] flex justify-center">
+    <!-- Middle-ground Liquid Glass: Moderately translucent (50%), stacked on mobile -->
+    <div class="w-full flex flex-col lg:flex-row items-center justify-between bg-white/60 md:bg-white/45 backdrop-blur-2xl backdrop-saturate-200 px-3 sm:px-4 md:px-8 py-3 rounded-3xl lg:rounded-full shadow-[inset_0_1px_2px_rgba(255,255,255,0.8),_0_12px_40px_rgba(15,23,42,0.15)] border border-white/70 lg:border-white/60 gap-3 lg:gap-0">
+      
+      <!-- Top Row Mobile / Left Desktop: Logo + Hamburger -->
+      <div class="flex items-center justify-between w-full lg:w-auto px-1 lg:px-0">
+        <!-- Logo -->
+        <a href="/" aria-label="Página inicial Trama" class="flex items-center gap-2 group transition-transform hover:scale-105 active:scale-95 cursor-pointer">
+          <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-2xl bg-gradient-to-tr from-blue-600 to-sky-400 flex items-center justify-center text-white shadow-lg shadow-blue-500/20 pulse-glow">
+            <i data-lucide="hexagon" class="w-4 h-4 sm:w-5 sm:h-5 drop-shadow-sm"></i>
+          </div>
+          <span class="text-xl md:text-xl font-bold tracking-tight text-slate-900 font-outfit uppercase drop-shadow-sm">TRAMA<span class="text-blue-600">.</span></span>
+        </a>
+
+        <!-- Mobile Actions: Menu Hamburger -->
+        <div class="flex items-center gap-2 sm:gap-3 lg:hidden">
+            <button id="mobile-menu-btn" class="text-slate-800 hover:text-blue-600 p-1 sm:p-2" aria-label="Menu">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+      </div>
+
+      <!-- Desktop: Segmented Search Bar -->
+      <div class="hidden lg:flex items-center flex-1 mx-6">
+        <div class="relative w-full flex items-center bg-white/60 rounded-full border border-slate-200/50 shadow-sm hover:shadow-md transition-shadow">
+          <!-- Segment 1: O que busca -->
+          <div class="flex-1 group">
+            <div class="px-5 py-2 rounded-full hover:bg-white/80 transition-colors cursor-pointer">
+              <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider">O que busca</label>
+              <input id="desktop-search-input" type="text" class="w-full bg-transparent outline-none text-sm text-slate-800 placeholder-slate-400 font-medium" placeholder="Projetos, criadores...">
+            </div>
+          </div>
+          <!-- Divider --><div class="w-px h-8 bg-slate-200/60"></div>
+          <!-- Segment 2: Categoria -->
+          <div class="flex-shrink-0 group">
+            <div class="px-5 py-2 rounded-full hover:bg-white/80 transition-colors cursor-pointer">
+              <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider">Categoria</label>
+              <span class="text-sm text-slate-400 font-medium">Todas</span>
+            </div>
+          </div>
+          <!-- Divider --><div class="w-px h-8 bg-slate-200/60"></div>
+          <!-- Segment 3: Ordenar -->
+          <div class="flex-shrink-0 group">
+            <div class="px-5 py-2 rounded-full hover:bg-white/80 transition-colors cursor-pointer">
+              <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider">Ordenar</label>
+              <span class="text-sm text-slate-400 font-medium">Populares</span>
+            </div>
+          </div>
+          <!-- Search Icon Button -->
+          <div class="pr-2">
+            <button class="w-9 h-9 bg-blue-600 hover:bg-blue-700 text-white rounded-full flex items-center justify-center transition-colors shadow-sm active:scale-95 text-lg">
+              <i data-lucide="search" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile: Search Pill (Airbnb Style Pivot) -->
+      <div class="lg:hidden w-full mt-3 px-1 relative z-20">
+        <button id="mobile-search-trigger" class="w-full flex items-center justify-center gap-3 bg-white hover:bg-slate-50 rounded-[1.5rem] shadow-lg border border-slate-200 py-3.5 transition-all text-slate-800 focus:outline-none focus:ring-4 focus:ring-blue-100">
+          <i data-lucide="search" class="w-5 h-5 text-slate-800"></i>
+          <span class="text-[15px] font-bold text-slate-800 tracking-tight">Iniciar sua busca</span>
+        </button>
+      </div>
+
+
+      <!-- Right side: Actions (Desktop only) -->
+      <div class="hidden lg:flex items-center gap-6">
+        <button class="text-[12px] font-extrabold tracking-widest uppercase text-slate-600 hover:text-blue-600 transition-colors cursor-pointer relative z-10 pointer-events-auto">
+          Cadastrar
+        </button>
+        <button class="btn-hover-fx bg-gradient-to-r from-blue-600 to-sky-400 text-white font-semibold px-7 py-3 rounded-xl shadow-xl shadow-blue-500/20 text-[12px] tracking-widest uppercase flex items-center gap-2 cursor-pointer relative z-10 pointer-events-auto">
+          Entrar <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </div>
+    
+    <!-- Mobile Menu Overlay (Fullscreen Dribbble Style) -->
+    <div id="mobile-menu" class="hidden fixed inset-0 z-[100] bg-white overflow-y-auto lg:hidden">
+      <!-- Modal Header matching Dribbble -->
+      <div class="flex items-center justify-between px-5 py-4 border-b border-slate-100 sticky top-0 bg-white z-10">
+        <button id="close-mobile-menu" class="p-2 -ml-2 rounded-xl text-slate-900 hover:bg-slate-100 transition-colors border border-transparent">
+           <i data-lucide="x" class="w-8 h-8"></i>
+        </button>
+        <!-- Logo -->
+        <a href="/" class="flex items-center gap-2 pr-4">
+          <div class="w-8 h-8 rounded-2xl bg-gradient-to-tr from-blue-600 to-sky-400 flex items-center justify-center text-white shadow-md">
+            <i data-lucide="hexagon" class="w-4 h-4"></i>
+          </div>
+          <span class="text-xl font-bold tracking-tight text-slate-900 font-outfit uppercase">TRAMA<span class="text-blue-600">.</span></span>
+        </a>
+        <div class="w-10"></div> <!-- Spacer for center alignment -->
+      </div>
+
+      <!-- Modal Body (Standard Platform Scale) -->
+      <div class="flex flex-col bg-white px-6 py-6">
+        <div class="flex flex-col gap-6">
+          <a href="#" class="text-slate-900 font-bold text-[24px] font-outfit flex justify-between items-center group cursor-pointer hover:text-blue-600 transition-colors">
+            Explore <i data-lucide="chevron-down" class="w-6 h-6 text-slate-800 transition-transform"></i>
+          </a>
+          <a href="#" class="text-slate-900 font-bold text-[24px] font-outfit flex justify-between items-center group cursor-pointer hover:text-blue-600 transition-colors">
+            Projetos <i data-lucide="chevron-down" class="w-6 h-6 text-slate-800 transition-transform"></i>
+          </a>
+          <a href="#" class="text-slate-900 font-bold text-[24px] font-outfit flex justify-between items-center group cursor-pointer hover:text-blue-600 transition-colors">
+            Comunidade <i data-lucide="chevron-down" class="w-6 h-6 text-slate-800 transition-transform"></i>
+          </a>
+
+          <!-- Special Brand Link -->
+          <a href="#" class="text-blue-600 font-bold text-[16px] hover:text-blue-700 transition-colors mt-2 flex items-center gap-2">
+            Começar projeto <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+        </div>
+        
+        <!-- Bottom Actions -->
+        <div class="mt-16 flex flex-col gap-4 border-t border-slate-100 pt-8 pb-8">
+           <button class="w-full btn-hover-fx bg-blue-600 text-white font-semibold px-8 py-3.5 rounded-2xl shadow-xl shadow-blue-500/25 text-[15px] flex items-center justify-center">
+            Entrar
+          </button>
+           <button class="w-full btn-hover-fx bg-white text-slate-700 border border-slate-200 font-semibold px-6 py-3.5 rounded-2xl text-[15px] flex items-center justify-center shadow-lg hover:bg-slate-50">
+            Cadastrar-se
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══════════ HERO SECTION ═══════════ -->
+  <main class="relative w-full flex flex-col items-center justify-center overflow-hidden min-h-[calc(100svh-5rem)] lg:min-h-0 lg:h-[calc(100vh-5.5rem)] pt-40 md:pt-32 pb-32 md:pb-24">
+    
+    <!-- 1. Full Bleed Video Background -->
+    <video class="absolute inset-0 w-full h-full object-cover object-[70%_center] md:object-center z-0" src="assets/Vídeo/RPG_combat_scene_202604241613.mp4" autoplay loop muted playsinline poster="assets/placeholder.jpg"></video>
+    
+    <!-- 2. Cinematic Vignette Overlay: Darker edges on mobile to ensure white text pops -->
+    <div class="absolute inset-0 z-0 pointer-events-none backdrop-blur-[1px] md:backdrop-blur-[1px]" style="background: radial-gradient(ellipse at 25% 45%, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0) 50%, rgba(15,23,42,0.85) 100%);"></div>
+    <div class="absolute inset-0 z-0 pointer-events-none lg:hidden" style="background: linear-gradient(to right, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.3) 80%, rgba(255,255,255,0) 100%);"></div>
+    
+    <!-- Soft bottom fade to DS bg-subtle (#f8fafc) -->
+    <div class="absolute inset-0 z-0 pointer-events-none" style="background: linear-gradient(to bottom, rgba(248,250,252,0) 65%, rgba(248,250,252,0.6) 85%, rgba(248,250,252,1) 100%);"></div>
+      
+      <!-- Large glowing orbs -->
+      <div class="absolute top-[10%] -left-[10%] md:left-[10%] w-[400px] md:w-[600px] h-[400px] md:h-[600px] rounded-full bg-blue-100 opacity-50 blur-[80px] md:blur-[100px] animate-pulse" style="animation-duration: 8s;"></div>
+      <div class="absolute top-[20%] right-[0%] md:right-[5%] w-[300px] md:w-[500px] h-[300px] md:h-[500px] rounded-full bg-sky-100 opacity-40 blur-[60px] md:blur-[80px] float-anim" style="animation-duration: 12s;"></div>
+
+    <!-- Left-aligned Content Constraint container -->
+    <div class="relative z-10 w-full px-5 md:px-8 xl:px-[10%] 2xl:px-[256px] flex flex-col items-start flex-1 justify-center mt-8 lg:mt-0">
+      
+      <!-- Headline & Subheadline (Mobile-first typography scale) -->
+      <div class="text-left w-full sm:max-w-xl lg:max-w-[70%] xl:max-w-[60%] animate-slide-up animate-delay-100 pointer-events-none mb-4 md:mb-12">
+        <h1 class="text-[clamp(2.5rem,8vw,4.5rem)] font-bold tracking-tighter leading-[1.05] sm:leading-[1.1] font-outfit drop-shadow-md text-slate-900 lg:whitespace-nowrap">
+          Descubra ideias que merecem<br class="hidden lg:block"> <span class="lg:hidden"> </span>ganhar vida
+        </h1>
+        
+        <p class="mt-4 sm:mt-6 text-[17px] sm:text-xl text-slate-700 md:text-slate-600 leading-snug sm:leading-relaxed font-medium drop-shadow-sm md:whitespace-nowrap max-w-[90%] sm:max-w-none">
+          Explore, encontre e apoie campanhas independentes em todo o Brasil
+        </p>
+      </div>
+    </div>
+
+    <!-- Bottom Absolute Actions (Mobile Stack to Desktop Row) -->
+    <div class="absolute bottom-8 lg:bottom-16 left-0 w-full z-20 px-5 md:px-8 xl:px-[10%] 2xl:px-[256px] flex flex-col sm:flex-row justify-between items-center sm:items-end pointer-events-auto gap-3 sm:gap-4 pb-2 md:pb-0">
+      
+      <!-- Bottom Left: Primary Action (Full width on mobile) -->
+      <div class="flex items-center w-full sm:w-auto animate-slide-up" style="animation-delay: 200ms;">
+        <button class="btn-hover-fx cursor-pointer relative z-10 w-full sm:w-auto bg-blue-600 text-white font-semibold px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl sm:rounded-2xl shadow-xl shadow-blue-500/25 text-[15px] sm:text-sm flex items-center justify-center">
+          Ver todos os projetos
+        </button>
+      </div>
+
+      <!-- Bottom Right: Secondary Action (Full width on mobile) -->
+      <button class="btn-hover-fx cursor-pointer relative z-10 w-full sm:w-auto bg-white/95 backdrop-blur-md sm:bg-white text-slate-700 border border-slate-200 font-semibold px-6 py-3.5 sm:py-4 rounded-xl sm:rounded-2xl text-[15px] sm:text-sm flex items-center justify-center shadow-lg hover:bg-slate-50 animate-slide-up" style="animation-delay: 300ms;">
+        Criar campanha
+      </button>
+    </div>
+      
+  </main>
+
+  <!-- ═══════════ MAIS APOIADOS SECTION ═══════════ -->
+  <section class="w-full px-5 md:px-8 xl:px-[10%] 2xl:px-[256px] pt-12 pb-12 relative z-10" id="destaques">
+    <div class="w-full">
+      <h2 class="text-4xl md:text-5xl lg:text-[3.25rem] font-bold tracking-tight font-outfit text-slate-900 mb-2">
+        Mais apoiados
+      </h2>
+      <p class="text-slate-600 font-medium text-lg max-w-2xl mt-4">
+        Os projetos que estão movimentando a comunidade neste exato momento.
+      </p>
+    </div>
+  </section>
+
+  <!-- HTML Modal: Airbnb Style Search Overlay (Mobile Only) -->
+  <div id="mobile-search-modal" class="hidden fixed inset-0 z-[100] bg-slate-50 overflow-y-auto">
+    <!-- Modal Header -->
+    <div class="bg-white px-4 pt-10 pb-4 shadow-sm relative sticky top-0 z-20 flex justify-center items-center">
+      <button id="close-search-modal" class="absolute top-1/2 -translate-y-1/2 left-4 p-2 bg-white rounded-full border border-slate-200 shadow-sm flex items-center justify-center text-slate-600 hover:bg-slate-50 transition-colors">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+      
+      <!-- Modal Logo -->
+      <a href="/" class="flex items-center gap-2 pointer-events-none">
+        <div class="w-8 h-8 rounded-2xl bg-gradient-to-tr from-blue-600 to-sky-400 flex items-center justify-center text-white shadow-md shadow-blue-500/20">
+          <i data-lucide="hexagon" class="w-4 h-4"></i>
+        </div>
+        <span class="text-lg font-bold tracking-tight text-slate-900 font-outfit uppercase">TRAMA<span class="text-blue-600">.</span></span>
+      </a>
+    </div>
+
+    <!-- Modal Body -->
+    <div class="p-4 flex flex-col gap-4 pb-[100px]">
+      
+      <!-- O que busca section -->
+      <div class="bg-white rounded-[24px] p-5 shadow-sm border border-slate-200/70">
+        <h2 class="text-[22px] font-bold text-slate-900 mb-4 font-outfit">O que você busca?</h2>
+        <div class="flex items-center gap-3 bg-white border-2 border-slate-200 rounded-xl px-4 py-3.5 shadow-sm focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-100 transition-all">
+          <i data-lucide="search" class="w-5 h-5 text-slate-700"></i>
+          <input type="text" class="flex-1 outline-none font-medium text-[15px] text-slate-800 placeholder-slate-400" placeholder="Buscar projetos inovadores...">
+        </div>
+      </div>
+
+      <!-- Categoria Section (Collapsed style) -->
+      <div class="bg-white rounded-[20px] p-5 shadow-sm border border-slate-200/70 flex justify-between items-center cursor-pointer active:scale-95 transition-transform">
+        <span class="text-slate-500 font-semibold text-[15px]">Categoria</span>
+        <span class="text-slate-900 font-bold text-[15px]">Adicionar categoria</span>
+      </div>
+
+      <!-- Ordenar Section (Collapsed style) -->
+      <div class="bg-white rounded-[20px] p-5 shadow-sm border border-slate-200/70 flex justify-between items-center cursor-pointer active:scale-95 transition-transform">
+        <span class="text-slate-500 font-semibold text-[15px]">Ordenar</span>
+        <span class="text-slate-900 font-bold text-[15px]">Populares</span>
+      </div>
+
+    </div>
+
+    <!-- Modal Footer (Fixed to bottom, Airbnb Pink changed to DS2 Blue) -->
+    <div class="fixed bottom-0 left-0 w-full bg-white border-t border-slate-200 p-4 flex justify-between items-center z-20 pb-8">
+      <button class="text-slate-900 underline font-bold text-[15px]">Limpar tudo</button>
+      <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-3.5 rounded-xl flex items-center gap-2 shadow-lg shadow-blue-500/25 active:scale-95 transition-all">
+         <i data-lucide="search" class="w-[18px] h-[18px] text-white"></i> Buscar
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // Dribbble Style Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const closeMobileMenuBtn = document.getElementById('close-mobile-menu');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    const toggleMobileMenu = () => {
+      mobileMenu.classList.toggle('hidden');
+      document.body.style.overflow = mobileMenu.classList.contains('hidden') ? 'auto' : 'hidden';
+    };
+
+    mobileMenuBtn?.addEventListener('click', toggleMobileMenu);
+    closeMobileMenuBtn?.addEventListener('click', toggleMobileMenu);
+
+    // Nav Scroll Effect for Extra Polish
+    const navContainer = document.querySelector('nav > div');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 10) {
+        navContainer.classList.add('bg-white/90', 'backdrop-blur-3xl');
+        navContainer.classList.remove('bg-white/60', 'md:bg-white/45');
+      } else {
+        navContainer.classList.remove('bg-white/90', 'backdrop-blur-3xl');
+        navContainer.classList.add('bg-white/60', 'md:bg-white/45');
+      }
+    });
+
+    // Airbnb Style Mobile Search Modal Toggle
+    const mobileSearchTrigger = document.getElementById('mobile-search-trigger');
+    const mobileSearchModal = document.getElementById('mobile-search-modal');
+    const closeSearchModalBtn = document.getElementById('close-search-modal');
+
+    // Prevent body scroll when modal is open
+    const toggleSearchModal = () => {
+      mobileSearchModal.classList.toggle('hidden');
+      document.body.style.overflow = mobileSearchModal.classList.contains('hidden') ? 'auto' : 'hidden';
+    };
+
+    mobileSearchTrigger?.addEventListener('click', toggleSearchModal);
+    closeSearchModalBtn?.addEventListener('click', toggleSearchModal);
+
+    // Desktop Search Logic implementation
+    const searchInput = document.getElementById('search-input');
+    const searchBtn = document.getElementById('search-btn');
+
+    function performSearch() {
+      const term = searchInput ? searchInput.value.trim() : '';
+      if (term) {
+        console.log(`Searching for: "${term}"`);
+      }
+    }
+
+    if(searchBtn && searchInput) {
+      searchBtn.addEventListener('click', performSearch);
+      searchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') performSearch();
+      });
+    }
+  </script>
+</body>
+</html>

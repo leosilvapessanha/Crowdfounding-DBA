@@ -1,0 +1,296 @@
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CONDOR Design System</title>
+<script src="assets/resource_3fa48481346f.es"></script>
+<script src="assets/lucide_latest_2eebd0ebe8c2.es"></script>
+<link href="assets/css2_85279f51aca0.css" rel="stylesheet"/>
+<style>
+body { font-family: 'Plus Jakarta Sans', sans-serif; }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #f1f1f1; }
+::-webkit-scrollbar-thumb { background: #d4d4d4; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #a3a3a3; }
+.toggle-checkbox:checked { right: 0; border-color: #ccf32f; }
+.toggle-checkbox:checked + .toggle-label { background-color: #ccf32f; }
+.ds-section { padding: 4rem 0; border-bottom: 1px solid #e5e5e5; }
+.ds-section:last-child { border-bottom: none; }
+.ds-label { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #a3a3a3; font-weight: 600; }
+.ds-swatch { width: 80px; height: 80px; border-radius: 1rem; border: 1px solid #e5e5e5; }
+.ds-row { display: flex; align-items: center; justify-content: space-between; padding: 1rem 0; border-bottom: 1px solid #f5f5f5; }
+.ds-row:last-child { border-bottom: none; }
+.ds-motion-box { width: 100%; padding: 2rem; border-radius: 1.5rem; border: 1px solid #e5e5e5; display:flex; align-items:center; justify-content:center; min-height: 120px; }
+</style>
+</head>
+<body class="bg-white text-neutral-900 antialiased selection:bg-[#ccf32f] selection:text-black">
+
+<!-- DS Navigation -->
+<nav class="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-neutral-100">
+<div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-[#ccf32f] flex items-center justify-center"><i class="w-4 h-4 text-black" data-lucide="bird"></i></div>
+<span class="text-lg font-medium tracking-tight">CONDOR</span>
+<span class="text-sm text-neutral-400 ml-2">Design System</span>
+</div>
+<div class="hidden md:flex items-center gap-6 text-sm font-medium text-neutral-500">
+<a class="hover:text-black transition-colors" href="#hero">Hero</a>
+<a class="hover:text-black transition-colors" href="#typography">Typography</a>
+<a class="hover:text-black transition-colors" href="#colors">Colors</a>
+<a class="hover:text-black transition-colors" href="#components">Components</a>
+<a class="hover:text-black transition-colors" href="#layout">Layout</a>
+<a class="hover:text-black transition-colors" href="#motion">Motion</a>
+<a class="hover:text-black transition-colors" href="#icons">Icons</a>
+</div>
+</div>
+</nav>
+
+<main class="w-full overflow-hidden">
+
+<!-- ====== SECTION 0: HERO (Exact Clone, Text Adapted) ====== -->
+<div id="hero" class="max-w-7xl mx-auto px-4 sm:px-6 mt-4">
+<div class="relative bg-[#ccf32f] rounded-[2.5rem] p-8 md:p-16 overflow-hidden min-h-[650px] md:min-h-[750px] flex flex-col md:block">
+<div class="relative z-10 max-w-xl mt-8 md:mt-16">
+<h1 class="text-4xl md:text-6xl font-medium tracking-tight leading-[1.1] mb-6">
+Design System &amp;<br/>Pattern Library.
+<span class="inline-block relative top-[-5px]"><i class="w-10 h-10 text-black/80" data-lucide="car-front"></i></span>
+</h1>
+<p class="text-xl md:text-2xl font-normal text-neutral-800 mb-10 max-w-md leading-relaxed">
+Canonical examples of every visual element, component, and interaction pattern used in the CONDOR landing page.
+</p>
+<div class="flex flex-col sm:flex-row items-start sm:items-center gap-6">
+<a class="bg-black text-white text-base font-medium px-7 py-3.5 rounded-full hover:bg-neutral-800 transition-transform hover:scale-105 flex items-center gap-2" href="#typography">
+<i class="w-5 h-5" data-lucide="clipboard-list"></i>Explore the system</a>
+<a class="text-base font-medium flex items-center gap-2 group hover:text-neutral-700" href="#components">
+<div class="w-8 h-8 rounded-full border-2 border-black flex items-center justify-center"><i class="w-4 h-4 ml-0.5" data-lucide="info"></i></div>View Components</a>
+</div>
+<div class="absolute right-0 top-1/4 hidden md:block opacity-60">
+<svg fill="none" height="120" stroke="black" stroke-dasharray="8 8" stroke-width="2" viewbox="0 0 100 100" width="120"><path d="M10,10 Q50,10 50,50 T90,90" stroke-linecap="round"></path></svg>
+</div>
+</div>
+<!-- Hero Phones Mockup -->
+<div class="relative md:absolute md:top-12 md:-right-20 mt-12 md:mt-0 flex justify-center md:block transform scale-90 md:scale-100">
+<div class="absolute top-0 -left-20 md:-left-32 w-[280px] h-[580px] bg-white rounded-[3rem] border-[8px] border-white shadow-2xl rotate-[-6deg] overflow-hidden hidden lg:block opacity-90 z-0">
+<div class="px-6 py-6 bg-neutral-50 border-b border-neutral-100">
+<div class="flex justify-between items-center mb-4"><span class="text-xl font-medium tracking-tight">Explorar</span><i class="w-5 h-5 text-neutral-400" data-lucide="map"></i></div>
+<div class="w-full bg-white h-10 rounded-xl border border-neutral-200 flex items-center px-3 gap-2"><i class="w-4 h-4 text-neutral-400" data-lucide="search"></i><span class="text-sm text-neutral-400">Buscar instrutor...</span></div>
+</div>
+<div class="relative h-full bg-neutral-100">
+<div class="absolute top-10 left-10 p-2 bg-black rounded-lg shadow-lg z-10"><i class="w-5 h-5 text-[#ccf32f]" data-lucide="car"></i></div>
+<div class="absolute top-32 right-12 p-2 bg-white rounded-lg shadow-lg z-10"><i class="w-5 h-5 text-neutral-500" data-lucide="car"></i></div>
+<div class="absolute bottom-32 left-1/2 -translate-x-1/2 w-[90%] bg-white p-3 rounded-xl shadow-xl">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-neutral-200 flex items-center justify-center overflow-hidden"><i class="w-5 h-5 text-neutral-500" data-lucide="user"></i></div>
+<div><p class="text-sm font-medium">Carlos Silva</p><p class="text-xs text-neutral-500">Instrutor Credenciado</p></div>
+<div class="ml-auto text-xs bg-[#ccf32f] px-2 py-1 rounded font-bold">4.9 ★</div>
+</div></div>
+</div></div>
+<div class="relative w-[300px] h-[600px] bg-black rounded-[3.5rem] border-[10px] border-black shadow-2xl z-10 overflow-hidden">
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-black rounded-b-2xl z-20"></div>
+<div class="w-full h-full bg-black text-white pt-10 px-6 flex flex-col">
+<div class="flex justify-between items-start mb-6"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-black"><i class="w-5 h-5" data-lucide="steering-wheel"></i></div><div><h3 class="text-lg font-medium leading-none">Minha Aula</h3><span class="text-xs text-neutral-500">Hoje, 14:00</span></div></div></div>
+<div class="relative w-full h-48 bg-neutral-800 rounded-2xl mb-6 overflow-hidden group">
+<div class="absolute inset-0 bg-neutral-700 flex items-center justify-center"><i class="w-16 h-16 text-neutral-500 opacity-50" data-lucide="car-front"></i></div>
+<div class="absolute top-3 right-3 bg-[#ccf32f] px-3 py-1 rounded-lg"><span class="text-xs font-bold text-black">Homologado</span></div>
+<div class="absolute bottom-3 left-3 bg-black/60 backdrop-blur-sm px-3 py-1 rounded-lg"><span class="text-xs font-medium text-white">Fiat Mobi • CFC Central</span></div>
+</div>
+<div class="mb-6"><div class="flex items-center gap-2 mb-2"><span class="w-2 h-2 rounded-full bg-green-500"></span><span class="text-xs text-neutral-400 uppercase tracking-wider">Instrutor Confirmado</span></div><h2 class="text-2xl font-medium tracking-tight text-white">Roberto Mendes</h2><span class="text-[#ccf32f] text-sm font-medium">Autônomo Verificado</span></div>
+<div class="space-y-3 mb-6">
+<div class="bg-neutral-900 rounded-xl p-3 flex gap-3 items-center border border-neutral-800"><div class="bg-neutral-800 p-2 rounded-lg text-[#ccf32f]"><i class="w-4 h-4" data-lucide="map-pin"></i></div><div class="text-sm text-neutral-300">Ponto de Encontro: Shopping Norte</div></div>
+<div class="bg-neutral-900 rounded-xl p-3 flex gap-3 items-center border border-neutral-800"><div class="bg-neutral-800 p-2 rounded-lg text-[#ccf32f]"><i class="w-4 h-4" data-lucide="wallet"></i></div><div class="text-sm text-neutral-300">Valor da Aula: R$ 60,00</div></div>
+</div>
+<div class="mt-auto pb-8 flex gap-3">
+<button class="flex-1 bg-neutral-800 hover:bg-neutral-700 text-white font-medium py-3 rounded-xl transition-colors text-sm">Cancelar</button>
+<button class="flex-1 bg-[#ccf32f] hover:bg-[#bce325] text-black font-medium py-3 rounded-xl transition-colors text-sm">Iniciar Aula</button>
+</div></div></div>
+</div></div></div>
+
+<!-- ====== SECTION 1: TYPOGRAPHY ====== -->
+<section id="typography" class="ds-section max-w-7xl mx-auto px-6">
+<h2 class="text-3xl md:text-5xl font-medium tracking-tight mb-16">Typography</h2>
+<div class="ds-row"><div><span class="ds-label">Heading 1</span><h1 class="text-4xl md:text-6xl font-medium tracking-tight leading-[1.1]">A liberdade para ensinar</h1></div><span class="text-sm text-neutral-400 whitespace-nowrap ml-4">36px–60px / leading-[1.1]</span></div>
+<div class="ds-row"><div><span class="ds-label">Heading 2</span><h2 class="text-3xl md:text-5xl font-medium tracking-tight">Diferenciais do Modelo</h2></div><span class="text-sm text-neutral-400 whitespace-nowrap ml-4">30px–48px / tracking-tight</span></div>
+<div class="ds-row"><div><span class="ds-label">Heading 3</span><h3 class="text-2xl font-medium">Perfil Aluno</h3></div><span class="text-sm text-neutral-400 whitespace-nowrap ml-4">24px / font-medium</span></div>
+<div class="ds-row"><div><span class="ds-label">Heading 4</span><h4 class="font-medium text-lg">Liberdade de Escolha</h4></div><span class="text-sm text-neutral-400 whitespace-nowrap ml-4">18px / font-medium</span></div>
+<div class="ds-row"><div><span class="ds-label">Bold L — Semibold 3xl</span><p class="text-3xl font-semibold tracking-tight">Nova Lei</p></div><span class="text-sm text-neutral-400 whitespace-nowrap ml-4">30px / font-semibold</span></div>
+<div class="ds-row"><div><span class="ds-label">Bold M — Medium xl</span><p class="text-xl font-medium tracking-tight">Explorar</p></div><span class="text-sm text-neutral-400 whitespace-nowrap ml-4">20px / font-medium</span></div>
+<div class="ds-row"><div><span class="ds-label">Bold S — Semibold sm</span><h4 class="text-sm font-semibold">Plataforma</h4></div><span class="text-sm text-neutral-400 whitespace-nowrap ml-4">14px / font-semibold</span></div>
+<div class="ds-row"><div><span class="ds-label">Paragraph Large</span><p class="text-xl md:text-2xl font-normal text-neutral-800 max-w-md leading-relaxed">Conectamos alunos a instrutores independentes.</p></div><span class="text-sm text-neutral-400 whitespace-nowrap ml-4">20px–24px / leading-relaxed</span></div>
+<div class="ds-row"><div><span class="ds-label">Regular M — Body</span><p class="text-base text-neutral-500 leading-relaxed">Aluno encontra o instrutor no app, verifica avaliações.</p></div><span class="text-sm text-neutral-400 whitespace-nowrap ml-4">16px / leading-relaxed</span></div>
+<div class="ds-row"><div><span class="ds-label">Regular S — Caption</span><p class="text-sm text-neutral-500">Baseado na Res. 1.020/2025</p></div><span class="text-sm text-neutral-400 whitespace-nowrap ml-4">14px / text-neutral-500</span></div>
+<div class="ds-row"><div><span class="ds-label">Regular XS — Micro</span><p class="text-xs text-neutral-400 uppercase tracking-wider">Instrutor Confirmado</p></div><span class="text-sm text-neutral-400 whitespace-nowrap ml-4">12px / uppercase tracking-wider</span></div>
+</section>
+
+<!-- ====== SECTION 2: COLORS & SURFACES ====== -->
+<section id="colors" class="ds-section max-w-7xl mx-auto px-6">
+<h2 class="text-3xl md:text-5xl font-medium tracking-tight mb-16">Colors &amp; Surfaces</h2>
+<h3 class="text-2xl font-medium mb-8">Brand &amp; Neutral Palette</h3>
+<div class="flex flex-wrap gap-6 mb-16">
+<div class="text-center"><div class="ds-swatch bg-[#ccf32f]"></div><p class="text-xs text-neutral-500 mt-2">#ccf32f<br/>Accent</p></div>
+<div class="text-center"><div class="ds-swatch bg-[#bce325]"></div><p class="text-xs text-neutral-500 mt-2">#bce325<br/>Accent Hover</p></div>
+<div class="text-center"><div class="ds-swatch bg-[#84cc16]"></div><p class="text-xs text-neutral-500 mt-2">#84cc16<br/>Green Stat</p></div>
+<div class="text-center"><div class="ds-swatch bg-black"></div><p class="text-xs text-neutral-500 mt-2">#000000<br/>Primary</p></div>
+<div class="text-center"><div class="ds-swatch bg-neutral-800"></div><p class="text-xs text-neutral-500 mt-2">neutral-800<br/>Dark Alt</p></div>
+<div class="text-center"><div class="ds-swatch bg-neutral-900"></div><p class="text-xs text-neutral-500 mt-2">neutral-900<br/>Card Dark</p></div>
+<div class="text-center"><div class="ds-swatch bg-white"></div><p class="text-xs text-neutral-500 mt-2">#ffffff<br/>Background</p></div>
+<div class="text-center"><div class="ds-swatch bg-neutral-50"></div><p class="text-xs text-neutral-500 mt-2">neutral-50<br/>Surface</p></div>
+<div class="text-center"><div class="ds-swatch bg-neutral-100"></div><p class="text-xs text-neutral-500 mt-2">neutral-100<br/>Border</p></div>
+</div>
+<h3 class="text-2xl font-medium mb-8">Text Colors</h3>
+<div class="flex flex-wrap gap-6 mb-16">
+<div class="text-center"><div class="ds-swatch bg-neutral-900 flex items-center justify-center"><span class="text-white text-xs">Aa</span></div><p class="text-xs text-neutral-500 mt-2">neutral-900<br/>Body</p></div>
+<div class="text-center"><div class="ds-swatch bg-white border flex items-center justify-center"><span class="text-neutral-800 text-xs">Aa</span></div><p class="text-xs text-neutral-500 mt-2">neutral-800<br/>Subtitle</p></div>
+<div class="text-center"><div class="ds-swatch bg-white border flex items-center justify-center"><span class="text-neutral-500 text-xs">Aa</span></div><p class="text-xs text-neutral-500 mt-2">neutral-500<br/>Muted</p></div>
+<div class="text-center"><div class="ds-swatch bg-white border flex items-center justify-center"><span class="text-neutral-400 text-xs">Aa</span></div><p class="text-xs text-neutral-500 mt-2">neutral-400<br/>Caption</p></div>
+<div class="text-center"><div class="ds-swatch bg-black flex items-center justify-center"><span class="text-[#ccf32f] text-xs font-medium">Aa</span></div><p class="text-xs text-neutral-500 mt-2">#ccf32f on dark<br/>Accent Text</p></div>
+</div>
+<h3 class="text-2xl font-medium mb-8">Surfaces &amp; Overlays</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-white/80 backdrop-blur-md border border-neutral-100 rounded-2xl p-6"><p class="ds-label mb-2">Navbar Glass</p><p class="text-sm text-neutral-500">bg-white/80 backdrop-blur-md</p></div>
+<div class="bg-black/60 backdrop-blur-sm rounded-2xl p-6"><p class="ds-label mb-2 text-neutral-300">Dark Overlay</p><p class="text-sm text-neutral-400">bg-black/60 backdrop-blur-sm</p></div>
+<div class="bg-neutral-50 rounded-2xl p-6 border border-neutral-100"><p class="ds-label mb-2">Neutral Surface</p><p class="text-sm text-neutral-500">bg-neutral-50 border-neutral-100</p></div>
+</div>
+</section>
+
+<!-- ====== SECTION 3: UI COMPONENTS ====== -->
+<section id="components" class="ds-section max-w-7xl mx-auto px-6">
+<h2 class="text-3xl md:text-5xl font-medium tracking-tight mb-16">UI Components</h2>
+
+<h3 class="text-2xl font-medium mb-8">Buttons</h3>
+<div class="flex flex-wrap gap-6 mb-16 items-center">
+<div class="text-center"><a class="bg-black text-white text-base font-medium px-7 py-3.5 rounded-full hover:bg-neutral-800 transition-transform hover:scale-105 flex items-center gap-2" href="#"><i class="w-5 h-5" data-lucide="clipboard-list"></i>Primary CTA</a><p class="ds-label mt-3">Primary CTA</p></div>
+<div class="text-center"><a class="bg-black text-white text-sm font-medium px-5 py-2.5 rounded-full hover:bg-neutral-800 transition-colors flex items-center gap-2" href="#"><span>Nav CTA</span><i class="w-4 h-4" data-lucide="arrow-right"></i></a><p class="ds-label mt-3">Nav Button</p></div>
+<div class="text-center"><button class="bg-[#ccf32f] hover:bg-[#bce325] text-black font-medium py-3 px-6 rounded-xl transition-colors text-sm">Accent Button</button><p class="ds-label mt-3">Accent</p></div>
+<div class="text-center"><button class="bg-neutral-800 hover:bg-neutral-700 text-white font-medium py-3 px-6 rounded-xl transition-colors text-sm">Secondary</button><p class="ds-label mt-3">Secondary Dark</p></div>
+<div class="text-center"><button class="w-full bg-black text-white text-base font-medium px-8 py-4 rounded-xl hover:bg-neutral-800 transition-colors flex items-center justify-center gap-2">Submit <i class="w-4 h-4" data-lucide="arrow-right"></i></button><p class="ds-label mt-3">Full-width Submit</p></div>
+</div>
+
+<h3 class="text-2xl font-medium mb-8">Form Inputs</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16 max-w-3xl">
+<div><label class="block text-sm font-medium text-neutral-700 mb-1">Text Input</label><input class="w-full px-4 py-3 rounded-xl border border-neutral-200 focus:border-black focus:ring-0 outline-none transition-colors" placeholder="Digite seu nome" type="text"/></div>
+<div><label class="block text-sm font-medium text-neutral-700 mb-1">Tel Input</label><input class="w-full px-4 py-3 rounded-xl border border-neutral-200 focus:border-black focus:ring-0 outline-none transition-colors" placeholder="(00) 00000-0000" type="tel"/></div>
+<div><label class="block text-sm font-medium text-neutral-700 mb-1">Select</label><select class="w-full px-4 py-3 rounded-xl border border-neutral-200 focus:border-black focus:ring-0 outline-none transition-colors bg-white"><option disabled="" selected="" value="">UF</option><option value="SP">SP</option><option value="RJ">RJ</option></select></div>
+</div>
+
+<h3 class="text-2xl font-medium mb-8">Radio Cards</h3>
+<div class="grid grid-cols-2 gap-4 max-w-md mb-16">
+<label class="cursor-pointer"><input checked="" class="peer sr-only" name="ds-profile" type="radio" value="aluno"/><div class="border-2 border-neutral-200 rounded-xl p-4 text-center peer-checked:border-black peer-checked:bg-neutral-50 transition-all"><i class="w-6 h-6 mx-auto mb-2 text-neutral-400" data-lucide="graduation-cap"></i><span class="block text-sm font-medium">Sou Aluno</span></div></label>
+<label class="cursor-pointer"><input class="peer sr-only" name="ds-profile" type="radio" value="instrutor"/><div class="border-2 border-neutral-200 rounded-xl p-4 text-center peer-checked:border-black peer-checked:bg-neutral-50 transition-all"><i class="w-6 h-6 mx-auto mb-2 text-neutral-400" data-lucide="briefcase"></i><span class="block text-sm font-medium">Sou Instrutor</span></div></label>
+</div>
+
+<h3 class="text-2xl font-medium mb-8">Cards</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+<div class="bg-white rounded-[2rem] p-8 relative overflow-hidden group hover:shadow-xl transition-all duration-300 border border-neutral-100"><div class="relative z-10"><span class="text-6xl font-medium text-[#ccf32f]/50 absolute -top-4 -right-4">1</span><div class="w-12 h-12 bg-black rounded-full flex items-center justify-center mb-6 text-white"><i class="w-6 h-6" data-lucide="smartphone"></i></div><h3 class="text-xl font-medium mb-3">Step Card</h3><p class="text-base text-neutral-500 leading-relaxed">Hover to see shadow elevation.</p></div></div>
+<div class="bg-neutral-50 rounded-[2.5rem] p-10 border border-neutral-100"><div class="flex items-center gap-4 mb-8"><div class="w-14 h-14 rounded-full bg-black text-white flex items-center justify-center"><i class="w-7 h-7" data-lucide="graduation-cap"></i></div><h3 class="text-2xl font-medium">Feature Card</h3></div><ul class="space-y-6"><li class="flex gap-4 items-start"><div class="mt-1 bg-[#ccf32f] rounded-full p-1"><i class="w-3 h-3 text-black" data-lucide="check"></i></div><div><h4 class="font-medium text-lg">Benefit Title</h4><p class="text-neutral-500 mt-1">Description of the benefit.</p></div></li></ul></div>
+<div class="bg-black text-white rounded-[2.5rem] p-10 border border-neutral-800 relative overflow-hidden"><div class="absolute top-0 right-0 w-64 h-64 bg-[#ccf32f] opacity-10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div><div class="flex items-center gap-4 mb-8 relative z-10"><div class="w-14 h-14 rounded-full bg-[#ccf32f] text-black flex items-center justify-center"><i class="w-7 h-7" data-lucide="briefcase"></i></div><h3 class="text-2xl font-medium">Dark Card</h3></div><ul class="space-y-6 relative z-10"><li class="flex gap-4 items-start"><div class="mt-1 bg-[#ccf32f]/20 text-[#ccf32f] rounded-full p-1"><i class="w-3 h-3" data-lucide="check"></i></div><div><h4 class="font-medium text-lg">Dark Benefit</h4><p class="text-neutral-400 mt-1">Description on dark surface.</p></div></li></ul></div>
+</div>
+
+<h3 class="text-2xl font-medium mb-8">Accordion (FAQ)</h3>
+<div class="space-y-4 max-w-3xl">
+<details class="group bg-neutral-50 p-6 rounded-2xl cursor-pointer"><summary class="flex justify-between items-center font-medium list-none"><span>Example accordion question?</span><span class="transition group-open:rotate-180"><i class="w-5 h-5" data-lucide="chevron-down"></i></span></summary><p class="text-neutral-600 mt-4 text-sm leading-relaxed">This is an example answer demonstrating the accordion component.</p></details>
+<details class="group bg-neutral-50 p-6 rounded-2xl cursor-pointer"><summary class="flex justify-between items-center font-medium list-none"><span>Another question example?</span><span class="transition group-open:rotate-180"><i class="w-5 h-5" data-lucide="chevron-down"></i></span></summary><p class="text-neutral-600 mt-4 text-sm leading-relaxed">Another answer to showcase the repeating pattern.</p></details>
+</div>
+</section>
+
+<!-- ====== SECTION 4: LAYOUT & SPACING ====== -->
+<section id="layout" class="ds-section max-w-7xl mx-auto px-6">
+<h2 class="text-3xl md:text-5xl font-medium tracking-tight mb-16">Layout &amp; Spacing</h2>
+
+<h3 class="text-2xl font-medium mb-8">Stats Bar (Flex Wrap)</h3>
+<div class="border-b border-neutral-100 pb-12 mb-12">
+<div class="flex flex-wrap justify-center md:justify-between items-center gap-8 md:gap-12">
+<div class="text-center md:text-left"><p class="text-3xl font-semibold tracking-tight">Nova Lei</p><p class="text-sm text-neutral-500">Baseado na Res. 1.020/2025</p></div>
+<div class="w-px h-12 bg-neutral-200 hidden md:block"></div>
+<div class="text-center md:text-left"><p class="text-3xl font-semibold tracking-tight text-[#84cc16]">-30%</p><p class="text-sm text-neutral-500">Custo Médio da CNH</p></div>
+<div class="w-px h-12 bg-neutral-200 hidden md:block"></div>
+<div class="text-center md:text-left"><p class="text-3xl font-semibold tracking-tight">100%</p><p class="text-sm text-neutral-500">Segurança Jurídica</p></div>
+</div></div>
+
+<h3 class="text-2xl font-medium mb-8">2-Column Grid</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-12 mb-12">
+<div class="bg-neutral-50 rounded-[2.5rem] p-10 border border-neutral-100 min-h-[160px] flex items-center justify-center"><span class="ds-label">Column A</span></div>
+<div class="bg-black text-white rounded-[2.5rem] p-10 border border-neutral-800 min-h-[160px] flex items-center justify-center"><span class="ds-label text-neutral-400">Column B</span></div>
+</div>
+
+<h3 class="text-2xl font-medium mb-8">3-Column Grid</h3>
+<div class="bg-neutral-50 rounded-[3rem] p-8 md:p-12 mb-12">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="bg-white rounded-[2rem] p-8 border border-neutral-100 min-h-[140px] flex items-center justify-center"><span class="ds-label">Col 1</span></div>
+<div class="bg-white rounded-[2rem] p-8 border border-neutral-100 min-h-[140px] flex items-center justify-center"><span class="ds-label">Col 2</span></div>
+<div class="bg-white rounded-[2rem] p-8 border border-neutral-100 min-h-[140px] flex items-center justify-center"><span class="ds-label">Col 3</span></div>
+</div></div>
+
+<h3 class="text-2xl font-medium mb-8">Spacing Tokens</h3>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="text-center p-4 bg-neutral-50 rounded-xl"><span class="ds-label">Section Padding</span><p class="text-sm text-neutral-500 mt-1">py-12 / py-20</p></div>
+<div class="text-center p-4 bg-neutral-50 rounded-xl"><span class="ds-label">Card Padding</span><p class="text-sm text-neutral-500 mt-1">p-8 / p-10</p></div>
+<div class="text-center p-4 bg-neutral-50 rounded-xl"><span class="ds-label">Container</span><p class="text-sm text-neutral-500 mt-1">max-w-7xl px-6</p></div>
+<div class="text-center p-4 bg-neutral-50 rounded-xl"><span class="ds-label">Border Radius</span><p class="text-sm text-neutral-500 mt-1">2rem / 2.5rem / 3rem</p></div>
+</div>
+</section>
+
+<!-- ====== SECTION 5: MOTION & INTERACTION ====== -->
+<section id="motion" class="ds-section max-w-7xl mx-auto px-6">
+<h2 class="text-3xl md:text-5xl font-medium tracking-tight mb-16">Motion &amp; Interaction</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="ds-motion-box flex-col gap-4"><p class="ds-label mb-4">hover:scale-105 — CTA Button</p><a class="bg-black text-white text-base font-medium px-7 py-3.5 rounded-full hover:bg-neutral-800 transition-transform hover:scale-105 flex items-center gap-2" href="#">Hover me <i class="w-5 h-5" data-lucide="arrow-right"></i></a></div>
+<div class="ds-motion-box flex-col gap-4"><p class="ds-label mb-4">hover:shadow-xl — Card Elevation</p><div class="bg-white rounded-[2rem] p-6 border border-neutral-100 group hover:shadow-xl transition-all duration-300 cursor-pointer"><p class="text-sm text-neutral-500">Hover this card to see shadow elevation</p></div></div>
+<div class="ds-motion-box flex-col gap-4"><p class="ds-label mb-4">group-open:rotate-180 — Chevron</p><details class="group bg-neutral-50 p-6 rounded-2xl cursor-pointer w-full"><summary class="flex justify-between items-center font-medium list-none"><span>Click to toggle</span><span class="transition group-open:rotate-180"><i class="w-5 h-5" data-lucide="chevron-down"></i></span></summary><p class="text-neutral-600 mt-4 text-sm">Chevron rotates 180° on open.</p></details></div>
+<div class="ds-motion-box flex-col gap-4"><p class="ds-label mb-4">transition-colors — Nav Links</p><div class="flex gap-6"><a class="text-neutral-500 hover:text-black transition-colors font-medium cursor-pointer">Link A</a><a class="text-neutral-500 hover:text-black transition-colors font-medium cursor-pointer">Link B</a><a class="text-neutral-400 hover:text-white transition-colors font-medium cursor-pointer bg-black px-4 py-2 rounded-lg">Footer Link</a></div></div>
+</div>
+</section>
+
+<!-- ====== SECTION 6: ICONS ====== -->
+<section id="icons" class="ds-section max-w-7xl mx-auto px-6 pb-24">
+<h2 class="text-3xl md:text-5xl font-medium tracking-tight mb-16">Icons</h2>
+<p class="text-base text-neutral-500 mb-8 leading-relaxed">All icons use Lucide via <code class="bg-neutral-100 px-2 py-0.5 rounded text-sm">&lt;i data-lucide="name"&gt;</code>.</p>
+<h3 class="text-2xl font-medium mb-8">Icon Set Used</h3>
+<div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-6 mb-16">
+<div class="flex flex-col items-center gap-2 p-4 bg-neutral-50 rounded-xl"><i class="w-6 h-6 text-black" data-lucide="bird"></i><span class="text-xs text-neutral-500">bird</span></div>
+<div class="flex flex-col items-center gap-2 p-4 bg-neutral-50 rounded-xl"><i class="w-6 h-6 text-black" data-lucide="car-front"></i><span class="text-xs text-neutral-500">car-front</span></div>
+<div class="flex flex-col items-center gap-2 p-4 bg-neutral-50 rounded-xl"><i class="w-6 h-6 text-black" data-lucide="car"></i><span class="text-xs text-neutral-500">car</span></div>
+<div class="flex flex-col items-center gap-2 p-4 bg-neutral-50 rounded-xl"><i class="w-6 h-6 text-black" data-lucide="arrow-right"></i><span class="text-xs text-neutral-500">arrow-right</span></div>
+<div class="flex flex-col items-center gap-2 p-4 bg-neutral-50 rounded-xl"><i class="w-6 h-6 text-black" data-lucide="clipboard-list"></i><span class="text-xs text-neutral-500">clipboard-list</span></div>
+<div class="flex flex-col items-center gap-2 p-4 bg-neutral-50 rounded-xl"><i class="w-6 h-6 text-black" data-lucide="info"></i><span class="text-xs text-neutral-500">info</span></div>
+<div class="flex flex-col items-center gap-2 p-4 bg-neutral-50 rounded-xl"><i class="w-6 h-6 text-black" data-lucide="map"></i><span class="text-xs text-neutral-500">map</span></div>
+<div class="flex flex-col items-center gap-2 p-4 bg-neutral-50 rounded-xl"><i class="w-6 h-6 text-black" data-lucide="search"></i><span class="text-xs text-neutral-500">search</span></div>
+<div class="flex flex-col items-center gap-2 p-4 bg-neutral-50 rounded-xl"><i class="w-6 h-6 text-black" data-lucide="user"></i><span class="text-xs text-neutral-500">user</span></div>
+<div class="flex flex-col items-center gap-2 p-4 bg-neutral-50 rounded-xl"><i class="w-6 h-6 text-black" data-lucide="map-pin"></i><span class="text-xs text-neutral-500">map-pin</span></div>
+<div class="flex flex-col items-center gap-2 p-4 bg-neutral-50 rounded-xl"><i class="w-6 h-6 text-black" data-lucide="wallet"></i><span class="text-xs text-neutral-500">wallet</span></div>
+<div class="flex flex-col items-center gap-2 p-4 bg-neutral-50 rounded-xl"><i class="w-6 h-6 text-black" data-lucide="graduation-cap"></i><span class="text-xs text-neutral-500">graduation-cap</span></div>
+<div class="flex flex-col items-center gap-2 p-4 bg-neutral-50 rounded-xl"><i class="w-6 h-6 text-black" data-lucide="briefcase"></i><span class="text-xs text-neutral-500">briefcase</span></div>
+<div class="flex flex-col items-center gap-2 p-4 bg-neutral-50 rounded-xl"><i class="w-6 h-6 text-black" data-lucide="check"></i><span class="text-xs text-neutral-500">check</span></div>
+<div class="flex flex-col items-center gap-2 p-4 bg-neutral-50 rounded-xl"><i class="w-6 h-6 text-black" data-lucide="smartphone"></i><span class="text-xs text-neutral-500">smartphone</span></div>
+<div class="flex flex-col items-center gap-2 p-4 bg-neutral-50 rounded-xl"><i class="w-6 h-6 text-black" data-lucide="file-check"></i><span class="text-xs text-neutral-500">file-check</span></div>
+<div class="flex flex-col items-center gap-2 p-4 bg-neutral-50 rounded-xl"><i class="w-6 h-6 text-black" data-lucide="chevron-down"></i><span class="text-xs text-neutral-500">chevron-down</span></div>
+<div class="flex flex-col items-center gap-2 p-4 bg-neutral-50 rounded-xl"><i class="w-6 h-6 text-black" data-lucide="lock"></i><span class="text-xs text-neutral-500">lock</span></div>
+<div class="flex flex-col items-center gap-2 p-4 bg-neutral-50 rounded-xl"><i class="w-6 h-6 text-black" data-lucide="mail"></i><span class="text-xs text-neutral-500">mail</span></div>
+<div class="flex flex-col items-center gap-2 p-4 bg-neutral-50 rounded-xl"><i class="w-6 h-6 text-black" data-lucide="message-circle"></i><span class="text-xs text-neutral-500">message-circle</span></div>
+<div class="flex flex-col items-center gap-2 p-4 bg-neutral-50 rounded-xl"><i class="w-6 h-6 text-black" data-lucide="instagram"></i><span class="text-xs text-neutral-500">instagram</span></div>
+<div class="flex flex-col items-center gap-2 p-4 bg-neutral-50 rounded-xl"><i class="w-6 h-6 text-black" data-lucide="linkedin"></i><span class="text-xs text-neutral-500">linkedin</span></div>
+<div class="flex flex-col items-center gap-2 p-4 bg-neutral-50 rounded-xl"><i class="w-6 h-6 text-black" data-lucide="steering-wheel"></i><span class="text-xs text-neutral-500">steering-wheel</span></div>
+</div>
+
+<h3 class="text-2xl font-medium mb-8">Size Variants</h3>
+<div class="flex flex-wrap items-end gap-8 mb-12">
+<div class="flex flex-col items-center gap-2"><i class="w-3 h-3 text-black" data-lucide="check"></i><span class="text-xs text-neutral-500">w-3 h-3</span></div>
+<div class="flex flex-col items-center gap-2"><i class="w-4 h-4 text-black" data-lucide="arrow-right"></i><span class="text-xs text-neutral-500">w-4 h-4</span></div>
+<div class="flex flex-col items-center gap-2"><i class="w-5 h-5 text-black" data-lucide="car"></i><span class="text-xs text-neutral-500">w-5 h-5</span></div>
+<div class="flex flex-col items-center gap-2"><i class="w-6 h-6 text-black" data-lucide="smartphone"></i><span class="text-xs text-neutral-500">w-6 h-6</span></div>
+<div class="flex flex-col items-center gap-2"><i class="w-7 h-7 text-black" data-lucide="graduation-cap"></i><span class="text-xs text-neutral-500">w-7 h-7</span></div>
+<div class="flex flex-col items-center gap-2"><i class="w-10 h-10 text-black" data-lucide="car-front"></i><span class="text-xs text-neutral-500">w-10 h-10</span></div>
+<div class="flex flex-col items-center gap-2"><i class="w-16 h-16 text-neutral-500 opacity-50" data-lucide="car-front"></i><span class="text-xs text-neutral-500">w-16 h-16</span></div>
+</div>
+
+<h3 class="text-2xl font-medium mb-8">Color Inheritance</h3>
+<div class="flex flex-wrap items-center gap-8">
+<div class="flex flex-col items-center gap-2 p-4 bg-neutral-50 rounded-xl"><i class="w-6 h-6 text-black" data-lucide="bird"></i><span class="text-xs text-neutral-500">text-black</span></div>
+<div class="flex flex-col items-center gap-2 p-4 bg-neutral-50 rounded-xl"><i class="w-6 h-6 text-neutral-400" data-lucide="map"></i><span class="text-xs text-neutral-500">text-neutral-400</span></div>
+<div class="flex flex-col items-center gap-2 p-4 bg-neutral-50 rounded-xl"><i class="w-6 h-6 text-neutral-500" data-lucide="car"></i><span class="text-xs text-neutral-500">text-neutral-500</span></div>
+<div class="flex flex-col items-center gap-2 p-4 bg-black rounded-xl"><i class="w-6 h-6 text-[#ccf32f]" data-lucide="car"></i><span class="text-xs text-neutral-400">text-[#ccf32f]</span></div>
+<div class="flex flex-col items-center gap-2 p-4 bg-black rounded-xl"><i class="w-6 h-6 text-white" data-lucide="smartphone"></i><span class="text-xs text-neutral-400">text-white</span></div>
+</div>
+</section>
+
+</main>
+<script>lucide.createIcons();</script>
+</body></html>
