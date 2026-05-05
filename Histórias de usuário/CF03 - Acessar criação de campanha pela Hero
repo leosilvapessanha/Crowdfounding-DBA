@@ -1,0 +1,64 @@
+### Acessar criação de campanha pela Hero
+
+**Como:** criador de projeto  
+**Quero:** clicar em “Criar campanha”  
+**Para:** iniciar o fluxo de publicação de uma campanha
+
+**_LOCALIZAÇÃO:_**  
+Home > Hero Section > CTA “Criar campanha”
+
+---
+
+#### Contexto
+
+Apesar do foco principal da home ser o apoiador, criadores também precisam encontrar um caminho claro para iniciar uma campanha.
+
+Esse CTA deve existir de forma secundária, sem competir com a ação principal de exploração de projetos.
+
+Responsividade não é negociável.
+
+---
+
+#### Regras de negócio
+
+1. O CTA de criação de campanha deve ter peso visual secundário.
+2. Usuários não autenticados devem ser direcionados para login ou cadastro antes de criar uma campanha.
+3. Usuários autenticados podem ser direcionados diretamente para o fluxo de criação.
+4. O CTA deve funcionar corretamente em desktop, tablet e mobile.
+5. O CTA não deve competir visualmente com o CTA principal da hero.
+
+---
+
+#### Solução
+
+1. Exibir o botão “Criar campanha” como ação secundária.
+2. Ao clicar, verificar se o usuário está autenticado.
+3. Caso esteja logado, direcionar para o fluxo de criação de campanha.
+4. Caso não esteja logado, direcionar para login ou cadastro.
+5. Manter a hierarquia visual inferior ao CTA principal.
+6. Garantir que o CTA seja acessível e fácil de tocar no mobile.
+
+---
+
+#### Critérios de aceite
+
+1. O CTA deve estar visível sem competir com o CTA principal.
+2. O CTA deve direcionar corretamente usuários autenticados para criação de campanha.
+3. O CTA deve direcionar usuários não autenticados para login ou cadastro.
+4. O CTA deve ser acessível por teclado.
+5. Em mobile, o CTA deve permanecer legível e fácil de tocar.
+6. O CTA não deve gerar quebra visual ou overflow horizontal.
+
+---
+
+#### Cenários
+
+1. **Criador logado acessa criação de campanha**  
+   **Dado que:** o usuário está logado  
+   **Quando:** clicar em “Criar campanha”  
+   **Então:** deve ser direcionado para o fluxo de criação de campanha
+
+2. **Criador não logado acessa criação de campanha**  
+   **Dado que:** o usuário não está logado  
+   **Quando:** clicar em “Criar campanha”  
+   **Então:** deve ser direcionado para login ou cadastro antes de continuar

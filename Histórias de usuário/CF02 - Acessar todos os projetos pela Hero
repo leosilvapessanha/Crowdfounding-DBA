@@ -1,0 +1,65 @@
+### Acessar todos os projetos pela Hero
+
+**Como:** apoiador  
+**Quero:** clicar em “Ver todos os projetos”  
+**Para:** acessar uma listagem completa de campanhas disponíveis
+
+**_LOCALIZAÇÃO:_**  
+Home > Hero Section > CTA “Ver todos os projetos”
+
+---
+
+#### Contexto
+
+A hero section deve oferecer um caminho direto para o usuário iniciar a exploração de campanhas. O botão “Ver todos os projetos” funciona como CTA principal para quem deseja navegar pelo catálogo completo.
+
+Esse CTA deve ser claro, acessível e fácil de tocar em dispositivos móveis.
+
+Responsividade não é negociável.
+
+---
+
+#### Regras de negócio
+
+1. O CTA “Ver todos os projetos” deve ser a ação principal da hero.
+2. O botão deve direcionar para uma listagem de projetos.
+3. O botão deve manter maior destaque visual que o CTA de criação de campanha.
+4. O CTA deve respeitar área mínima de toque em mobile.
+5. O CTA deve possuir estados de hover, active e focus.
+
+---
+
+#### Solução
+
+1. Exibir o botão “Ver todos os projetos” na hero section.
+2. Ao clicar, direcionar o usuário para a listagem completa de projetos, em uma outra página.
+3. Preservar o contexto de descoberta da plataforma.
+4. Garantir boa área de toque em dispositivos móveis.
+5. Aplicar estado visual de hover, active e focus.
+6. Garantir que o botão não fique cortado ou ilegível em telas pequenas.
+
+---
+
+#### Critérios de aceite
+
+1. O botão deve estar visível na hero section.
+2. O botão deve direcionar corretamente para a listagem de projetos.
+3. O botão deve ter destaque visual superior ao CTA secundário.
+4. O botão deve ser acessível por teclado.
+5. O botão deve ter foco visível.
+6. Em mobile, o botão deve ter área de toque confortável e não ficar cortado.
+7. O botão não deve gerar overflow horizontal.
+
+---
+
+#### Cenários
+
+1. **Usuário clica em “Ver todos os projetos”**  
+   **Dado que:** o usuário está na hero section  
+   **Quando:** clicar no botão “Ver todos os projetos”  
+   **Então:** deve ser direcionado para a listagem completa de projetos
+
+2. **Usuário acessa pelo celular**  
+   **Dado que:** o usuário está em um dispositivo móvel  
+   **Quando:** visualizar o CTA principal  
+   **Então:** o botão deve estar legível, acessível e com área de toque adequada
