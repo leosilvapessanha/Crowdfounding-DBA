@@ -1,4 +1,5 @@
 import { Badge } from './Badge.js';
+import { ProgressBar } from './ProgressBar.js';
 import { escapeHtml, icon } from './utils.js';
 
 const creatorIcon = `<svg class="w-3.5 h-3.5 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 12h8M12 2L8 12h8L12 2zM10 7h4M9 12v1c0 3 1.5 5 3 5s3-2 3-5v-1M10 14h4M4 10v11" /><circle cx="4" cy="7" r="2.5" /><path d="M1 5l1.5 1.5M4 1v2M7 5l-1.5 1.5M18 21c0-3-2-4-6-4s-6 1-6 4" /></svg>`;
@@ -29,7 +30,7 @@ export function ProjectCard(campaign) {
           <span class="text-[13px] font-bold text-slate-900">${progress}% fundado</span>
           ${TimeLabel(campaign)}
         </div>
-        <div class="w-full bg-slate-100 rounded-full h-[4px]"><div class="bg-blue-600 h-[4px] rounded-full" style="width: ${progress}%"></div></div>
+        ${ProgressBar({ progress })}
       </div>
       <div class="mt-auto pt-2">
         <div class="w-full h-px bg-slate-100 block mb-3"></div>

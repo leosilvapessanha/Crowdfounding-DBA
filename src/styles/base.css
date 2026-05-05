@@ -1,10 +1,13 @@
+html {
+  overflow-x: clip;
+}
+
 body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   margin: 0;
   background-color: var(--bg-subtle);
   color: var(--text-dark);
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
 }
 
 *,

@@ -2,65 +2,93 @@ import { footerColumns, inspirationLinks, inspirationTabs } from '../data/catego
 import { escapeHtml, icon } from './utils.js';
 
 function InspirationTabs() {
-  return `<div class="flex gap-3 mb-10 overflow-x-auto pb-4 scrollbar-hide">
-    ${inspirationTabs.map((tab, index) => `<button type="button" class="px-5 py-2.5 rounded-full text-[13px] font-bold whitespace-nowrap transition-all duration-300 ${index === 0 ? 'bg-slate-900 text-white shadow-lg shadow-slate-200/50' : 'bg-white text-slate-500 hover:bg-slate-50 border border-slate-100'}">${escapeHtml(tab)}</button>`).join('')}
+  return `<div class="flex gap-6 mb-8 overflow-x-auto border-b border-slate-200 scrollbar-hide">
+    ${inspirationTabs.map((tab, index) => `
+      <button type="button" class="pb-3 text-[14px] font-inter whitespace-nowrap transition-all duration-300 border-b-2 -mb-[1px] ${index === 0 ? 'text-blue-600 font-bold border-blue-600' : 'text-slate-500 font-medium border-transparent hover:text-blue-600 hover:border-blue-300'}">
+        ${escapeHtml(tab)}
+      </button>
+    `).join('')}
   </div>`;
 }
 
 function InspirationLinks() {
-  const links = inspirationLinks.map(([title, description]) => `<a href="#" class="flex flex-col group gap-0.5"><span class="text-[14px] font-bold text-slate-900 group-hover:text-blue-600 transition-colors">${escapeHtml(title)}</span><span class="text-[13px] text-slate-500">${escapeHtml(description)}</span></a>`).join('');
-  return `<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-y-8 gap-x-6">
+  const links = inspirationLinks.map(([title, description]) => `
+    <a href="#" class="flex flex-col group gap-1 transition-all">
+      <span class="text-[14px] font-semibold text-slate-900 font-inter group-hover:text-blue-600 transition-colors">${escapeHtml(title)}</span>
+      <span class="text-[14px] text-slate-500 font-inter group-hover:text-blue-400 transition-colors">${escapeHtml(description)}</span>
+    </a>
+  `).join('');
+  
+  return `<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-y-6 gap-x-4 mb-12">
     ${links}
-    <a href="#" class="flex items-center text-[14px] font-bold text-slate-900 hover:text-blue-600 transition-all">Mostrar mais ${icon('chevron-down', 'w-4 h-4 ml-1')}</a>
+    <a href="#" class="flex items-center text-[14px] font-semibold font-inter text-slate-900 hover:text-blue-600 transition-colors group">
+      Mostrar mais <span class="transform group-hover:translate-y-0.5 transition-transform">${icon('chevron-down', 'w-4 h-4 ml-1')}</span>
+    </a>
   </div>`;
 }
 
 function FooterColumns() {
-  return `<div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
-    ${footerColumns.map((column) => `<div class="flex flex-col gap-5">
-      <h3 class="font-outfit font-bold text-[15px] text-slate-900 uppercase tracking-wider">${escapeHtml(column.title)}</h3>
-      <ul class="flex flex-col gap-4">
-        ${column.links.map((link) => `<li><a href="#" class="text-[14px] text-slate-500 hover:text-blue-600 transition-colors">${escapeHtml(link)}</a></li>`).join('')}
+  return `<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+    ${footerColumns.map((column) => `
+    <div class="flex flex-col gap-4">
+      <h3 class="font-manrope font-bold text-[15px] text-slate-900 tracking-tight">${escapeHtml(column.title)}</h3>
+      <ul class="flex flex-col gap-3">
+        ${column.links.map((link) => `
+        <li><a href="#" class="text-[14px] font-inter text-slate-500 hover:text-blue-600 transition-colors">${escapeHtml(link)}</a></li>
+        `).join('')}
       </ul>
     </div>`).join('')}
   </div>`;
 }
 
 export function Footer() {
-  return `<footer class="bg-white border-t border-slate-100 mt-24">
-    <div class="px-5 md:px-8 xl:px-[10%] 2xl:px-[256px] py-20">
-      <div class="mb-16">
-        <h2 class="font-outfit text-[22px] sm:text-[24px] font-bold text-slate-900 mb-8 tracking-tight">Incentive projetos intependentes!</h2>
+  return `<footer class="bg-slate-50 border-t border-slate-200 mt-16 relative z-10 selection:bg-blue-500/20 selection:text-blue-900">
+    <div class="px-6 md:px-10 xl:px-20 max-w-[1440px] mx-auto py-12">
+      
+      <div class="mb-10 reveal visible">
+        <h2 class="text-[24px] font-manrope font-bold text-slate-900 mb-6 tracking-tight">Inspiração para viagens futuras</h2>
         ${InspirationTabs()}
         ${InspirationLinks()}
       </div>
-      <div class="w-full h-px bg-slate-100 mb-16"></div>
-      ${FooterColumns()}
-      <div class="w-full h-px bg-slate-100 mb-10"></div>
-      <div class="flex flex-col lg:flex-row justify-between items-center gap-8">
-        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-x-4 gap-y-2 text-[13px] text-slate-500">
-          <span class="font-medium">© 2024 Trama RPG, Inc.</span>
-          <span class="hidden sm:inline text-slate-300">•</span>
+
+      <div class="w-full h-px bg-slate-200 mb-10 opacity-80"></div>
+      
+      <div class="reveal visible">
+        ${FooterColumns()}
+      </div>
+      
+      <div class="w-full h-px bg-slate-200 mb-6 opacity-80"></div>
+      
+      <div class="flex flex-col lg:flex-row justify-between items-center gap-6 reveal visible">
+        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-x-3 gap-y-2 text-[14px] font-inter text-slate-500">
+          <span class="font-medium text-slate-600">© 2024 Trama RPG, Inc.</span>
+          <span class="hidden sm:inline text-slate-300">·</span>
           <a href="#" class="hover:text-blue-600 transition-colors">Privacidade</a>
-          <span class="hidden sm:inline text-slate-300">•</span>
+          <span class="hidden sm:inline text-slate-300">·</span>
           <a href="#" class="hover:text-blue-600 transition-colors">Termos</a>
-          <span class="hidden sm:inline text-slate-300">•</span>
+          <span class="hidden sm:inline text-slate-300">·</span>
           <a href="#" class="hover:text-blue-600 transition-colors">Mapa do site</a>
-          <span class="hidden sm:inline text-slate-300">•</span>
+          <span class="hidden sm:inline text-slate-300">·</span>
           <a href="#" class="hover:text-blue-600 transition-colors">Informações da empresa</a>
         </div>
+        
         <div class="flex flex-wrap items-center justify-center gap-6">
-          <div class="flex items-center gap-6">
-            <button type="button" class="flex items-center gap-2 hover:bg-slate-50 px-3 py-1.5 rounded-lg transition-all text-[13px] font-bold text-slate-900 border border-transparent hover:border-slate-100">${icon('globe', 'w-4 h-4')} Português (BR)</button>
-            <button type="button" class="flex items-center gap-2 hover:bg-slate-50 px-3 py-1.5 rounded-lg transition-all text-[13px] font-bold text-slate-900 border border-transparent hover:border-slate-100">R$ BRL</button>
+          <div class="flex items-center gap-2 text-[14px] font-semibold text-slate-700 font-inter">
+            <button type="button" class="flex items-center gap-2 hover:text-blue-600 hover:bg-blue-50 px-3 py-1.5 rounded-lg transition-colors">
+              ${icon('globe', 'w-4 h-4')} Português (BR)
+            </button>
+            <button type="button" class="flex items-center gap-1 hover:text-blue-600 hover:bg-blue-50 px-3 py-1.5 rounded-lg transition-colors">
+              R$ BRL
+            </button>
           </div>
-          <div class="flex items-center gap-5 border-l border-slate-100 pl-6 text-slate-900">
-            <a href="#" class="hover:text-blue-600 transition-all hover:scale-110 transform" aria-label="Facebook">${icon('facebook', 'w-4 h-4')}</a>
-            <a href="#" class="hover:text-blue-600 transition-all hover:scale-110 transform" aria-label="Twitter">${icon('twitter', 'w-4 h-4')}</a>
-            <a href="#" class="hover:text-blue-600 transition-all hover:scale-110 transform" aria-label="Instagram">${icon('instagram', 'w-4 h-4')}</a>
+          <div class="flex items-center gap-4 text-slate-400 border-l border-slate-200 pl-4">
+            <a href="#" class="hover:text-blue-600 hover:scale-110 transform transition-all" aria-label="Facebook">${icon('facebook', 'w-[18px] h-[18px]')}</a>
+            <a href="#" class="hover:text-blue-600 hover:scale-110 transform transition-all" aria-label="Twitter">${icon('twitter', 'w-[18px] h-[18px]')}</a>
+            <a href="#" class="hover:text-blue-600 hover:scale-110 transform transition-all" aria-label="Instagram">${icon('instagram', 'w-[18px] h-[18px]')}</a>
           </div>
         </div>
       </div>
+      
     </div>
   </footer>`;
 }

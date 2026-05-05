@@ -8,7 +8,7 @@ const normalizeId = (title, index) =>
 
 const createCampaign = ([badge, image, title, creator, progress, time, price, urgent = false], index) => ({
   id: normalizeId(title, index),
-  href: '#',
+  href: `?project=${normalizeId(title, index)}`,
   badge,
   image,
   title,
@@ -76,3 +76,11 @@ export const carouselCtas = {
     label: 'Ver todos',
   },
 };
+
+export const getAllCampaigns = () => [
+  ...campaignGroups.featured,
+  ...campaignGroups.weekly,
+  ...campaignGroups.ending,
+];
+
+export const getCampaignById = (id) => getAllCampaigns().find((c) => c.id === id);
