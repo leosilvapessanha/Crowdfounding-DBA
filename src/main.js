@@ -25,7 +25,8 @@ import './styles/components.css';
 import './styles/layout.css';
 import './styles/utilities.css';
 
-import { CampaignDetails, initCarousel, initDonation } from './components/CampaignDetails.js';
+import { initBottomSheet } from './components/BottomSheet.js';
+import { CampaignDetails, initCarousel, initDonation, initCountdown } from './components/CampaignDetails.js';
 import { initCampaignTabs, initHeaderSwap } from './components/CampaignHeader.js';
 
 const appRoot = document.getElementById('app');
@@ -65,12 +66,14 @@ function render() {
   initNavScrollEffect();
   initSearch();
 
-  // Initialize carousel, donation, tabs and header swap on campaign details page
+  // Initialize carousel, donation, tabs, header swap, and bottom sheet on campaign details page
   if (projectId) {
     initCarousel();
     initDonation();
+    initCountdown();
     initCampaignTabs();
     initHeaderSwap();
+    initBottomSheet();
   }
 
   // Smooth scroll for hash links on the same page

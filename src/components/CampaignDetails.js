@@ -1,5 +1,6 @@
 import { getCampaignById } from '../data/campaigns.js';
 import { Badge } from './Badge.js';
+import { BottomSheet } from './BottomSheet.js';
 import { CampaignHeader } from './CampaignHeader.js';
 import { Footer } from './Footer.js';
 import { Header } from './Header.js';
@@ -44,13 +45,13 @@ function CampaignHero(campaign) {
   const slides = [campaign.image, campaign.image, campaign.image];
 
   return `<section class="w-full bg-white border-b border-slate-200 pt-20">
-    <div class="px-5 md:px-8 xl:px-[10%] 2xl:px-[256px] py-10 md:py-16">
+    <div class="px-5 md:px-8 xl:px-[10%] 2xl:px-[256px] py-8 md:py-16">
       <!-- Back link -->
       <a href="/" class="inline-flex items-center gap-2 text-[14px] text-slate-500 hover:text-blue-600 transition-colors mb-8 font-inter font-medium">
         ${icon('arrow-right', 'w-4 h-4 rotate-180')} Voltar para os projetos
       </a>
 
-      <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-stretch">
+      <div class="grid lg:grid-cols-2 gap-6 lg:gap-16 items-stretch">
         <!-- LEFT: Image Carousel -->
         <div class="relative w-full flex flex-col">
           <div class="rounded-2xl overflow-hidden bg-slate-100 relative shadow-sm border border-slate-200 flex-1 min-h-[360px]" id="hero-carousel">
@@ -85,38 +86,36 @@ function CampaignHero(campaign) {
           <span class="inline-block bg-blue-50 text-blue-600 text-[11px] font-bold px-3 py-1.5 rounded-full uppercase tracking-widest mb-5 border border-blue-100 w-fit">
             ${escapeHtml(campaign.badge)}
           </span>
-          <h1 class="text-[28px] sm:text-[36px] lg:text-[40px] font-outfit font-bold text-slate-900 leading-tight mb-4">${escapeHtml(campaign.title)}</h1>
-          <p class="text-[15px] font-inter text-slate-500 leading-relaxed mb-8 max-w-lg">
+          <h1 class="text-[24px] sm:text-[28px] lg:text-[40px] font-outfit font-bold text-slate-900 leading-tight mb-3 lg:mb-4">${escapeHtml(campaign.title)}</h1>
+          <p class="text-[14px] lg:text-[15px] font-inter text-slate-500 leading-relaxed mb-6 lg:mb-8">
             Ao apoiar esta campanha, você ajuda a trazer mais uma grande ideia para a realidade. O universo de <em>${escapeHtml(campaign.title)}</em> aguarda novos aventureiros.
           </p>
 
           <!-- Funding Amount -->
           <div class="mb-2">
-            <span class="text-[32px] lg:text-[38px] font-outfit font-bold text-blue-600 leading-none">${escapeHtml(campaign.price)}</span>
+            <span class="text-[26px] lg:text-[38px] font-outfit font-bold text-blue-600 leading-none">${escapeHtml(campaign.price)}</span>
           </div>
 
           <!-- Progress Bar -->
-          <div class="mb-2 max-w-md">${ProgressBar({ progress, height: 'h-[6px]' })}</div>
-          <p class="text-[13px] text-slate-500 font-inter mb-8">${progress}% financiado</p>
+          <div class="mb-2">${ProgressBar({ progress, height: 'h-[6px]' })}</div>
+          <p class="text-[12px] lg:text-[13px] text-slate-500 font-inter mb-6 lg:mb-8">${progress}% financiado</p>
 
           <!-- Stats Grid -->
-          <div class="grid grid-cols-3 gap-3 mb-10">
-            <div class="bg-slate-50 border border-slate-200/60 rounded-2xl p-5 text-center">
-              <div class="text-[22px] font-bold text-slate-900 font-outfit leading-none">1.248</div>
-              <div class="text-[12px] text-slate-500 font-inter mt-1.5">apoiadores</div>
+          <div class="grid grid-cols-2 gap-2 lg:gap-3 mb-8 lg:mb-10">
+            <div class="bg-slate-50 border border-slate-200/60 rounded-2xl p-3 lg:p-5 text-center">
+              <div class="text-[18px] lg:text-[22px] font-bold text-slate-900 font-outfit leading-none">1.248</div>
+              <div class="text-[11px] lg:text-[12px] text-slate-500 font-inter mt-1 lg:mt-1.5">apoiadores</div>
             </div>
-            <div class="bg-slate-50 border border-slate-200/60 rounded-2xl p-5 text-center">
-              <div class="text-[22px] font-bold text-slate-900 font-outfit leading-none">R$ 42.4k</div>
-              <div class="text-[12px] text-slate-500 font-inter mt-1.5">arrecadados</div>
-            </div>
-            <div class="bg-slate-50 border border-slate-200/60 rounded-2xl p-5 text-center">
-              <div class="text-[22px] font-bold ${campaign.urgent ? 'text-red-500' : 'text-slate-900'} font-outfit leading-none">${escapeHtml(campaign.time)}</div>
-              <div class="text-[12px] text-slate-500 font-inter mt-1.5">restantes</div>
+            <div class="bg-slate-50 border border-slate-200/60 rounded-2xl p-3 lg:p-5 text-center">
+              <div id="campaign-countdown" class="text-[18px] lg:text-[22px] font-bold ${campaign.urgent ? 'text-red-500' : 'text-slate-900'} font-outfit leading-none" data-time="${escapeHtml(campaign.time)}">
+                ${escapeHtml(campaign.time)}
+              </div>
+              <div class="text-[11px] lg:text-[12px] text-slate-500 font-inter mt-1 lg:mt-1.5">restantes</div>
             </div>
           </div>
 
           <!-- Single CTA -->
-          <a href="#campaign-details" class="w-fit bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-10 rounded-xl transition-all shadow-lg shadow-blue-600/20 hover:shadow-xl hover:-translate-y-0.5 flex items-center justify-center gap-2 text-[16px]">
+          <a href="#campaign-details" class="hidden lg:flex w-fit bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-10 rounded-xl transition-all shadow-lg shadow-blue-600/20 hover:shadow-xl hover:-translate-y-0.5 items-center justify-center gap-2 text-[16px]">
             Ver detalhes ${icon('arrow-right', 'w-5 h-5')}
           </a>
         </div>
@@ -132,39 +131,39 @@ function CampaignHero(campaign) {
 function CampaignContent(campaign) {
   const rewards = defaultRewards(campaign);
 
-  return `<section id="campaign-details" class="px-5 md:px-8 xl:px-[10%] 2xl:px-[256px] pt-12 md:pt-20 pb-0">
-    <div class="flex flex-col lg:flex-row gap-12 relative">
+  return `<section id="campaign-details" class="px-5 md:px-8 xl:px-[10%] 2xl:px-[256px] pt-10 md:pt-20 pb-0">
+    <div class="flex flex-col lg:flex-row gap-8 lg:gap-12 relative">
       <!-- LEFT: All scrollable content -->
       <div class="lg:w-[58%] shrink-0">
-        <div class="prose prose-slate max-w-none font-inter text-slate-600 mb-16" id="campaign-creator">
-          <h2 class="text-[24px] font-manrope font-bold text-slate-900 mb-6">Sobre o projeto</h2>
-          <p class="mb-4 text-[16px] leading-relaxed">Este é um projeto incrível criado por <strong class="text-slate-900">${escapeHtml(campaign.creator)}</strong>. Ao apoiar esta campanha, você ajuda a trazer mais uma grande ideia para a realidade. O universo de <em>${escapeHtml(campaign.title)}</em> aguarda novos aventureiros e você pode ser o próximo a moldar o seu destino.</p>
-          <p class="text-[16px] leading-relaxed mb-8">Os fundos arrecadados serão utilizados diretamente na produção de materiais gráficos, distribuição logística e na expansão do universo criativo que idealizamos.</p>
-          <p class="text-[16px] leading-relaxed mb-4"><strong>Por que apoiar agora?</strong><br>O financiamento coletivo é a única forma de garantir que este projeto saia do papel com a qualidade que ele merece. Apoiadores garantem não apenas recompensas exclusivas, mas preços que não serão praticados posteriormente no varejo.</p>
-          <p class="text-[16px] leading-relaxed">Nossa equipe trabalhou nos últimos 2 anos afinando as regras, as ilustrações e o mundo. Agora, o poder está em suas mãos. Faça parte da história.</p>
+        <div class="prose prose-slate max-w-none font-inter text-slate-600 mb-12 lg:mb-16" id="campaign-creator">
+          <h2 class="text-[20px] lg:text-[24px] font-manrope font-bold text-slate-900 mb-4 lg:mb-6">Sobre o projeto</h2>
+          <p class="mb-4 text-[15px] lg:text-[16px] leading-relaxed">Este é um projeto incrível criado por <strong class="text-slate-900">${escapeHtml(campaign.creator)}</strong>. Ao apoiar esta campanha, você ajuda a trazer mais uma grande ideia para a realidade. O universo de <em>${escapeHtml(campaign.title)}</em> aguarda novos aventureiros e você pode ser o próximo a moldar o seu destino.</p>
+          <p class="text-[15px] lg:text-[16px] leading-relaxed mb-6 lg:mb-8">Os fundos arrecadados serão utilizados diretamente na produção de materiais gráficos, distribuição logística e na expansão do universo criativo que idealizamos.</p>
+          <p class="text-[15px] lg:text-[16px] leading-relaxed mb-4"><strong>Por que apoiar agora?</strong><br>O financiamento coletivo é a única forma de garantir que este projeto saia do papel com a qualidade que ele merece. Apoiadores garantem não apenas recompensas exclusivas, mas preços que não serão praticados posteriormente no varejo.</p>
+          <p class="text-[15px] lg:text-[16px] leading-relaxed">Nossa equipe trabalhou nos últimos 2 anos afinando as regras, as ilustrações e o mundo. Agora, o poder está em suas mãos. Faça parte da história.</p>
         </div>
 
         <!-- FAQ -->
-        <div id="campaign-faq" class="py-10 border-t border-slate-100">
-          <h2 class="text-[24px] font-manrope font-bold text-slate-900 mb-4">Perguntas frequentes</h2>
-          <p class="text-slate-500 font-inter">Em breve...</p>
+        <div id="campaign-faq" class="py-8 lg:py-10 border-t border-slate-100">
+          <h2 class="text-[20px] lg:text-[24px] font-manrope font-bold text-slate-900 mb-4">Perguntas frequentes</h2>
+          <p class="text-slate-500 font-inter text-[14px] lg:text-[16px]">Em breve...</p>
         </div>
 
         <!-- Updates -->
-        <div id="campaign-updates" class="py-10 border-t border-slate-100">
-          <h2 class="text-[24px] font-manrope font-bold text-slate-900 mb-4">Atualizações</h2>
-          <p class="text-slate-500 font-inter">Em breve...</p>
+        <div id="campaign-updates" class="py-8 lg:py-10 border-t border-slate-100">
+          <h2 class="text-[20px] lg:text-[24px] font-manrope font-bold text-slate-900 mb-4">Atualizações</h2>
+          <p class="text-slate-500 font-inter text-[14px] lg:text-[16px]">Em breve...</p>
         </div>
 
         <!-- Comments -->
-        <div id="campaign-comments" class="pt-10 pb-16 border-t border-slate-100">
-          <h2 class="text-[24px] font-manrope font-bold text-slate-900 mb-4">Comentários</h2>
-          <p class="text-slate-500 font-inter">Em breve...</p>
+        <div id="campaign-comments" class="pt-8 lg:pt-10 pb-16 border-t border-slate-100">
+          <h2 class="text-[20px] lg:text-[24px] font-manrope font-bold text-slate-900 mb-4">Comentários</h2>
+          <p class="text-slate-500 font-inter text-[14px] lg:text-[16px]">Em breve...</p>
         </div>
       </div>
 
       <!-- RIGHT: Unified Donation + Rewards Panel -->
-      <div class="lg:flex-1 w-full lg:w-auto" id="campaign-rewards">
+      <div class="hidden lg:block lg:flex-1 w-full lg:w-auto" id="campaign-rewards">
         <div id="rewards-sticky-wrapper" class="lg:sticky lg:top-20 max-h-[calc(100vh-6rem)] overflow-y-auto scrollbar-hide rounded-[2rem]">
           <div class="bg-white border border-slate-200 rounded-[2rem] shadow-[0_8px_40px_rgba(0,0,0,0.04)] overflow-hidden">
 
@@ -318,17 +317,83 @@ export function initDonation() {
   });
 }
 
+/**
+ * Initialize dynamic countdown timer.
+ */
+export function initCountdown() {
+  const countdownEl = document.getElementById('campaign-countdown');
+  if (!countdownEl) return;
+
+  const timeStr = countdownEl.getAttribute('data-time') || '';
+  const daysMatch = timeStr.match(/\d+/);
+  let days = daysMatch ? parseInt(daysMatch[0], 10) : 0;
+  
+  // Fake remaining hours, mins, secs for effect
+  let hours = 23;
+  let minutes = 59;
+  let seconds = 59;
+  
+  function updateTimer() {
+    seconds--;
+    if (seconds < 0) {
+      seconds = 59;
+      minutes--;
+      if (minutes < 0) {
+        minutes = 59;
+        hours--;
+        if (hours < 0) {
+          hours = 23;
+          days--;
+          if (days < 0) {
+            countdownEl.textContent = 'Encerrado';
+            return;
+          }
+        }
+      }
+    }
+    
+    let formatted = '';
+    if (days > 0) {
+      formatted = `${days}d ${hours.toString().padStart(2, '0')}h`;
+    } else if (hours > 0) {
+      formatted = `${hours.toString().padStart(2, '0')}h ${minutes.toString().padStart(2, '0')}m`;
+    } else {
+      formatted = `${minutes.toString().padStart(2, '0')}m ${seconds.toString().padStart(2, '0')}s`;
+    }
+    countdownEl.textContent = formatted;
+  }
+  
+  // Initial call
+  updateTimer();
+  
+  // Set interval and store ID to avoid multiple intervals if re-rendered
+  if (window.campaignTimer) clearInterval(window.campaignTimer);
+  window.campaignTimer = setInterval(updateTimer, 1000);
+}
+
 export function CampaignDetails(projectId) {
   const campaign = getCampaignById(projectId);
   if (!campaign) return NotFoundPage();
 
+  const rewards = defaultRewards(campaign);
+
   return `
     ${Header()}
     ${CampaignHeader(campaign)}
-    <main class="min-h-screen">
+    <main class="min-h-screen pb-24 lg:pb-0">
       ${CampaignHero(campaign)}
       ${CampaignContent(campaign)}
     </main>
     ${Footer()}
+
+    <!-- Mobile Sticky CTA -->
+    <div class="fixed bottom-0 inset-x-0 z-[80] lg:hidden sticky-cta-bar bg-white/95 backdrop-blur-xl border-t border-slate-200 shadow-[0_-4px_20px_rgba(0,0,0,0.08)] px-5 pt-3" id="mobile-sticky-cta">
+      <button type="button" id="mobile-support-cta" class="w-full bg-gradient-to-r from-blue-600 to-sky-400 hover:from-blue-700 hover:to-sky-500 text-white font-bold py-3.5 rounded-xl transition-all shadow-lg shadow-blue-600/20 flex items-center justify-center gap-2 text-[15px]">
+        Apoiar esse projeto
+      </button>
+    </div>
+
+    <!-- Mobile Bottom Sheet -->
+    ${BottomSheet({ rewards, campaign })}
   `;
 }

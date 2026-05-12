@@ -21,3 +21,49 @@
 .btn-hover-fx:hover::after {
   opacity: 0.1;
 }
+
+/* ── Bottom Sheet ── */
+.bottom-sheet-overlay {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.bottom-sheet-overlay--active {
+  opacity: 1;
+}
+
+.bottom-sheet .bottom-sheet-container {
+  transform: translateY(100%);
+}
+
+.bottom-sheet--active .bottom-sheet-container {
+  animation: bsSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.bottom-sheet--closing .bottom-sheet-container {
+  animation: bsSlideDown 0.3s ease-out forwards;
+}
+
+@keyframes bsSlideUp {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+
+@keyframes bsSlideDown {
+  from { transform: translateY(0); }
+  to   { transform: translateY(100%); }
+}
+
+/* ── Sticky CTA Bar (mobile) ── */
+.sticky-cta-bar {
+  padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
+}
+
+/* ── Scrollbar hide for bottom sheet ── */
+.bottom-sheet-body::-webkit-scrollbar {
+  display: none;
+}
+.bottom-sheet-body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
