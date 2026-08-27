@@ -1,8 +1,74 @@
+/* ============================================================================
+   TRAMA — DESIGN TOKENS
+   ----------------------------------------------------------------------------
+   Extraídos da área do apoiador, que é a parte mais madura do produto e serve
+   de referência para o resto. Os valores abaixo não foram inventados: saíram de
+   uma auditoria do que já estava em uso (frequência entre parênteses).
+
+   Cores são declaradas em canais RGB, e não em hex, para que os modificadores
+   de opacidade do Tailwind continuem funcionando (ex.: bg-accent/20).
+   ============================================================================ */
+
 :root {
-  --primary-white: #ffffff;
-  --bg-subtle: #f8fafc;
-  --text-dark: #0f172a;
-  --text-muted: #64748b;
-  --accent: #2563eb;
-  --accent-light: rgba(37, 99, 235, 0.1);
+  /* ── Accent ──────────────────────────────────────────────────────────────
+     Azul é o accent do produto (blue-600, 124 usos). Ele é semântico, não
+     literal: a área do criador troca esses valores por violeta mais abaixo,
+     e todo componente construído sobre --accent acompanha sem alteração. */
+  --accent-50:  239 246 255;
+  --accent-100: 219 234 254;
+  --accent-200: 191 219 254;
+  --accent-500: 59 130 246;
+  --accent-600: 37 99 235;   /* cor de ação principal */
+  --accent-700: 29 78 216;   /* hover */
+
+  /* ── Neutros ─────────────────────────────────────────────────────────────
+     A rampa slate carrega toda a interface: texto, bordas e superfícies. */
+  --neutral-50:  248 250 252;
+  --neutral-100: 241 245 249;
+  --neutral-200: 226 232 240;  /* borda padrão (91 usos) */
+  --neutral-300: 203 213 225;
+  --neutral-400: 148 163 184;  /* texto desabilitado / placeholder */
+  --neutral-500: 100 116 139;  /* texto secundário (71 usos) */
+  --neutral-600: 71 85 105;
+  --neutral-700: 51 65 85;
+  --neutral-800: 30 41 59;
+  --neutral-900: 15 23 42;     /* texto principal (76 usos) */
+
+  /* ── Status ──────────────────────────────────────────────────────────────
+     Um tom por significado. Só entram na UI quando há um estado real a
+     comunicar, nunca como decoração. */
+  --success: 16 185 129;   /* concluído, valor liberado */
+  --warning: 245 158 11;   /* janela de decisão aberta, prazo chegando */
+  --danger:  239 68 68;    /* excluir, retirar apoio, cancelar */
+
+  /* ── Superfícies ─────────────────────────────────────────────────────── */
+  --surface:        255 255 255;  /* cards, modais, barras */
+  --surface-subtle: 248 250 252;  /* fundo de página */
+
+  /* ── Tipografia ──────────────────────────────────────────────────────────
+     Três famílias com papéis distintos:
+       inter   (170 usos) — corpo e interface
+       outfit  (43)       — números e títulos de destaque
+       manrope (31)       — títulos de seção */
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-display: 'Outfit', system-ui, sans-serif;
+  --font-heading: 'Manrope', system-ui, sans-serif;
+
+  /* ── Layout ──────────────────────────────────────────────────────────────
+     A gutter do container aparece igual em 10 telas; virou token para as
+     próximas não precisarem redescobrir o valor. */
+  --gutter-2xl: 256px;
+}
+
+/* ── Tema da área do criador ────────────────────────────────────────────────
+   A única diferença entre as duas áreas é o accent. Trocando os canais aqui,
+   botões, focos, steppers e badges mudam juntos, sem componente duplicado.
+   Aplicar com data-area="creator" em qualquer container. */
+[data-area='creator'] {
+  --accent-50:  245 243 255;
+  --accent-100: 237 233 254;
+  --accent-200: 221 214 254;
+  --accent-500: 139 92 246;
+  --accent-600: 124 58 237;
+  --accent-700: 109 40 217;
 }

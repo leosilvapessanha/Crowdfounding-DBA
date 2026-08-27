@@ -1,12 +1,8 @@
-html {
-  overflow-x: clip;
-}
-
 body {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: var(--font-body);
   margin: 0;
-  background-color: var(--bg-subtle);
-  color: var(--text-dark);
+  background-color: rgb(var(--surface-subtle));
+  color: rgb(var(--neutral-900));
   -webkit-font-smoothing: antialiased;
 }
 
@@ -17,14 +13,15 @@ body {
 }
 
 .font-manrope {
-  font-family: 'Manrope', sans-serif !important;
+  font-family: var(--font-heading) !important;
 }
 
 .font-outfit {
-  font-family: 'Outfit', sans-serif !important;
+  font-family: var(--font-display) !important;
 }
 
+/* Segue o accent da área: azul no apoiador, violeta no criador. */
 :focus-visible {
-  outline: 3px solid rgba(37, 99, 235, 0.55);
+  outline: 3px solid rgb(var(--accent-600) / 0.55);
   outline-offset: 3px;
 }

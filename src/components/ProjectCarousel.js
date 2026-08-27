@@ -13,7 +13,7 @@ function CarouselCta(cta) {
 }
 
 export function ProjectCarousel({ campaigns, cta }) {
-  return `<div class="-mx-5 px-5 md:mx-0 md:px-0 flex overflow-x-auto snap-x snap-mandatory hide-scrollbar gap-4 md:gap-5 pb-10 relative z-10 w-[100vw] md:w-auto items-stretch">
+  return `<div class="-mx-5 px-5 md:mx-0 md:px-0 flex overflow-x-auto snap-x snap-mandatory hide-scrollbar gap-4 md:gap-5 pt-2 pb-10 relative z-10 w-[100vw] md:w-auto items-stretch">
     ${campaigns.map(ProjectCard).join('')}
     ${cta ? CarouselCta(cta) : ''}
   </div>`;

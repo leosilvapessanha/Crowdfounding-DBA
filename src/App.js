@@ -31,7 +31,7 @@ const projectSections = [
 ];
 
 function ProjectSection(section) {
-  return `<section class="${section.className}" id="${section.id}">
+  return `<section class="${section.className} [overflow-x:clip]" id="${section.id}">
     <div class="px-5 md:px-8 xl:px-[10%] 2xl:px-[256px]">
       <div class="w-full">
         ${SectionHeader({ title: section.title, href: section.href })}

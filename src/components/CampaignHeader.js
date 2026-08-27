@@ -3,10 +3,11 @@ import { escapeHtml, icon } from './utils.js';
 
 const campaignTabs = [
   { label: 'Campanha', href: '#campaign-details', id: 'tab-campaign' },
-  { label: 'Recompensas', href: '#campaign-rewards', id: 'tab-rewards' },
+  { label: 'Recompensas', href: '#campaign-rewards-list', id: 'tab-rewards' },
   { label: 'Criador', href: '#campaign-creator', id: 'tab-creator' },
+  { label: 'Checkpoints', href: '#campaign-schedule', id: 'tab-schedule' },
+  { label: 'Atualizações do criador', href: '#campaign-creator-updates', id: 'tab-creator-updates' },
   { label: 'FAQ', href: '#campaign-faq', id: 'tab-faq', badge: '5' },
-  { label: 'Atualizações', href: '#campaign-updates', id: 'tab-updates', badge: '0' },
   { label: 'Comentários', href: '#campaign-comments', id: 'tab-comments', badge: '10' },
 ];
 

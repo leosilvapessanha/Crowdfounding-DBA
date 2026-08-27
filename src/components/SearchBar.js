@@ -1,4 +1,14 @@
-import { icon } from './utils.js';
+import { getCategories, SORT_OPTIONS } from '../data/campaigns.js';
+import { escapeHtml, icon, navigate } from './utils.js';
+
+function CategoryOptions(selected) {
+  return `<option value="">Todas</option>
+    ${getCategories().map((c) => `<option value="${escapeHtml(c)}" ${c === selected ? 'selected' : ''}>${escapeHtml(c)}</option>`).join('')}`;
+}
+
+function SortOptions(selected) {
+  return SORT_OPTIONS.map((o) => `<option value="${o.value}" ${o.value === selected ? 'selected' : ''}>${escapeHtml(o.label)}</option>`).join('');
+}
 
 export function DesktopSearchBar() {
   return `<div class="hidden lg:flex items-center flex-1 mx-6">
@@ -12,15 +22,19 @@ export function DesktopSearchBar() {
       <div class="w-px h-8 bg-slate-200/60"></div>
       <div class="flex-shrink-0 group">
         <div class="px-5 py-2 rounded-full hover:bg-white/80 transition-colors cursor-pointer">
-          <span class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider">Categoria</span>
-          <span class="text-sm text-slate-400 font-medium">Todas</span>
+          <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider" for="desktop-category-select">Categoria</label>
+          <select id="desktop-category-select" class="block max-w-[130px] truncate bg-transparent outline-none border-none appearance-none text-sm text-slate-600 font-medium cursor-pointer">
+            ${CategoryOptions('')}
+          </select>
         </div>
       </div>
       <div class="w-px h-8 bg-slate-200/60"></div>
       <div class="flex-shrink-0 group">
         <div class="px-5 py-2 rounded-full hover:bg-white/80 transition-colors cursor-pointer">
-          <span class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider">Ordenar</span>
-          <span class="text-sm text-slate-400 font-medium">Populares</span>
+          <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider" for="desktop-sort-select">Ordenar</label>
+          <select id="desktop-sort-select" class="block max-w-[150px] truncate bg-transparent outline-none border-none appearance-none text-sm text-slate-600 font-medium cursor-pointer">
+            ${SortOptions('populares')}
+          </select>
         </div>
       </div>
       <div class="pr-2">
@@ -59,21 +73,25 @@ export function SearchModal() {
         <h2 id="mobile-search-title" class="text-[22px] font-bold text-slate-900 mb-4 font-outfit">O que você busca?</h2>
         <div class="flex items-center gap-3 bg-white border-2 border-slate-200 rounded-xl px-4 py-3.5 shadow-sm focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-100 transition-all">
           ${icon('search', 'w-5 h-5 text-slate-700')}
-          <input type="text" class="flex-1 outline-none font-medium text-[15px] text-slate-800 placeholder-slate-400" placeholder="Buscar projetos inovadores..." aria-label="Buscar projetos">
+          <input id="mobile-search-input" type="text" class="flex-1 outline-none font-medium text-[15px] text-slate-800 placeholder-slate-400" placeholder="Buscar projetos inovadores..." aria-label="Buscar projetos">
         </div>
       </div>
-      <div class="bg-white rounded-[20px] p-5 shadow-sm border border-slate-200/70 flex justify-between items-center cursor-pointer active:scale-95 transition-transform">
+      <label class="bg-white rounded-[20px] p-5 shadow-sm border border-slate-200/70 flex justify-between items-center cursor-pointer active:scale-95 transition-transform">
         <span class="text-slate-500 font-semibold text-[15px]">Categoria</span>
-        <span class="text-slate-900 font-bold text-[15px]">Adicionar categoria</span>
-      </div>
-      <div class="bg-white rounded-[20px] p-5 shadow-sm border border-slate-200/70 flex justify-between items-center cursor-pointer active:scale-95 transition-transform">
+        <select id="mobile-category-select" class="bg-transparent outline-none border-none appearance-none text-right text-slate-900 font-bold text-[15px] cursor-pointer">
+          ${CategoryOptions('')}
+        </select>
+      </label>
+      <label class="bg-white rounded-[20px] p-5 shadow-sm border border-slate-200/70 flex justify-between items-center cursor-pointer active:scale-95 transition-transform">
         <span class="text-slate-500 font-semibold text-[15px]">Ordenar</span>
-        <span class="text-slate-900 font-bold text-[15px]">Populares</span>
-      </div>
+        <select id="mobile-sort-select" class="bg-transparent outline-none border-none appearance-none text-right text-slate-900 font-bold text-[15px] cursor-pointer">
+          ${SortOptions('populares')}
+        </select>
+      </label>
     </div>
     <div class="fixed bottom-0 left-0 w-full bg-white border-t border-slate-200 p-4 flex justify-between items-center z-20 pb-8">
-      <button type="button" class="text-slate-900 underline font-bold text-[15px]">Limpar tudo</button>
-      <button type="button" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-3.5 rounded-xl flex items-center gap-2 shadow-lg shadow-blue-500/25 active:scale-95 transition-all">
+      <button type="button" id="mobile-search-clear-btn" class="text-slate-900 underline font-bold text-[15px]">Limpar tudo</button>
+      <button type="button" id="mobile-search-submit-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-3.5 rounded-xl flex items-center gap-2 shadow-lg shadow-blue-500/25 active:scale-95 transition-all">
         ${icon('search', 'w-[18px] h-[18px] text-white')} Buscar
       </button>
     </div>
@@ -84,9 +102,18 @@ export function initSearch() {
   const mobileSearchTrigger = document.getElementById('mobile-search-trigger');
   const mobileSearchModal = document.getElementById('mobile-search-modal');
   const closeSearchModalBtn = document.getElementById('close-search-modal');
+
   const searchInput = document.getElementById('desktop-search-input');
+  const categorySelect = document.getElementById('desktop-category-select');
+  const sortSelect = document.getElementById('desktop-sort-select');
   const searchBtn = document.getElementById('desktop-search-btn');
-  const mobileSearchInput = mobileSearchModal?.querySelector('input');
+
+  const mobileSearchInput = document.getElementById('mobile-search-input');
+  const mobileCategorySelect = document.getElementById('mobile-category-select');
+  const mobileSortSelect = document.getElementById('mobile-sort-select');
+  const mobileSearchBtn = document.getElementById('mobile-search-submit-btn');
+  const mobileClearBtn = document.getElementById('mobile-search-clear-btn');
+
   let lastFocusedElement = null;
 
   const setSearchOpen = (isOpen) => {
@@ -109,18 +136,47 @@ export function initSearch() {
     }
   };
 
+  const goToResults = ({ term, category, sort }) => {
+    const params = new URLSearchParams();
+    if (term) params.set('search', term);
+    if (category) params.set('category', category);
+    if (sort && sort !== 'populares') params.set('sort', sort);
+    navigate(`/?${params.toString()}`);
+  };
+
   const performSearch = () => {
-    const term = searchInput ? searchInput.value.trim() : '';
-    if (term) {
-      document.dispatchEvent(new CustomEvent('trama:search', { detail: { term } }));
-    }
+    goToResults({
+      term: searchInput ? searchInput.value.trim() : '',
+      category: categorySelect ? categorySelect.value : '',
+      sort: sortSelect ? sortSelect.value : 'populares',
+    });
+  };
+
+  const performMobileSearch = () => {
+    goToResults({
+      term: mobileSearchInput ? mobileSearchInput.value.trim() : '',
+      category: mobileCategorySelect ? mobileCategorySelect.value : '',
+      sort: mobileSortSelect ? mobileSortSelect.value : 'populares',
+    });
+    setSearchOpen(false);
   };
 
   mobileSearchTrigger?.addEventListener('click', () => setSearchOpen(true));
   closeSearchModalBtn?.addEventListener('click', () => setSearchOpen(false));
+
   searchBtn?.addEventListener('click', performSearch);
   searchInput?.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') performSearch();
+  });
+
+  mobileSearchBtn?.addEventListener('click', performMobileSearch);
+  mobileSearchInput?.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') performMobileSearch();
+  });
+  mobileClearBtn?.addEventListener('click', () => {
+    if (mobileSearchInput) mobileSearchInput.value = '';
+    if (mobileCategorySelect) mobileCategorySelect.value = '';
+    if (mobileSortSelect) mobileSortSelect.value = 'populares';
   });
 
   window.addEventListener('keydown', (event) => {

@@ -6,19 +6,34 @@ const normalizeId = (title, index) =>
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/(^-|-$)/g, '')}-${index + 1}`;
 
-const createCampaign = ([badge, image, title, creator, progress, time, price, urgent = false], index) => ({
-  id: normalizeId(title, index),
-  href: `?project=${normalizeId(title, index)}`,
-  badge,
-  image,
-  title,
-  creator,
-  progress,
-  time,
-  price,
-  urgent,
-  alt: title,
-});
+/** These seed campaigns carry a progress percentage but no funding figures of their own. A goal
+ * derived from the id (stable across renders, never re-rolled) gives the campaign page something
+ * concrete to divide into checkpoints and to show as "arrecadado de X". */
+const seededGoal = (id) => {
+  let hash = 0;
+  for (let i = 0; i < id.length; i += 1) hash = (hash * 31 + id.charCodeAt(i)) >>> 0;
+  return 10000 + (hash % 41) * 1000; // R$ 10.000 – R$ 50.000, em passos de mil
+};
+
+const createCampaign = ([badge, image, title, creator, progress, time, price, urgent = false], index) => {
+  const id = normalizeId(title, index);
+  const goal = seededGoal(id);
+  return {
+    id,
+    href: `?project=${id}`,
+    badge,
+    image,
+    title,
+    creator,
+    progress,
+    time,
+    price,
+    urgent,
+    goal,
+    raised: Math.round((goal * (Number(progress) || 0)) / 100),
+    alt: title,
+  };
+};
 
 export const campaignGroups = {
   featured: [
@@ -27,7 +42,7 @@ export const campaignGroups = {
     ['Board Game', '/assets/Img/card_gloomhaven.png', 'Gloomhaven: Início do Fim', 'Editora Grok', 32, '22 dias', 'R$ 50'],
     ['Pledges Abertos', '/assets/Img/card_vampiro.png', 'Vampiro: A Máscara Luxo', 'Mundo das Trevas', 50, '18 dias', 'R$ 50'],
     ['Fantasia Oriental', '/assets/Img/card_l5r.png', 'A Lenda dos Cinco Anéis', 'New Order Editora', 12, '28 dias', 'R$ 50'],
-    ['Ficção Científica', '/assets/Img/card_cyberpunk.png', 'Cyberpunk RED', 'R. Talsorian', 90, '3 dias restantes', 'R$ 50', true],
+    ['Ficção Científica', '/assets/Img/card_cyberpunk.png', 'Cyberpunk RED', 'R. Talsorian', 90, 'Encerrado', 'R$ 50', false],
     ['Fantasia Animada', '/assets/Img/card_avatar.png', 'Avatar RPG: Legends', 'Magpie Games', 45, '35 dias', 'R$ 50'],
     ['Horror Cósmico', '/assets/Img/card_lovecraft.png', 'O Chamado de Cthulhu', 'Chaosium Inc.', 20, '40 dias', 'R$ 50'],
   ].map(createCampaign),
@@ -84,3 +99,60 @@ export const getAllCampaigns = () => [
 ];
 
 export const getCampaignById = (id) => getAllCampaigns().find((c) => c.id === id);
+
+/** A campaign whose deadline has passed — the "time" field carries "Encerrado" instead of a day
+ * count once it's over. Every support entry point (donation form, reward cards, checkout itself)
+ * gates on this so a closed campaign can't keep collecting pledges past its own deadline. */
+export const isCampaignEnded = (campaign) => /^encerrad/i.test(String(campaign?.time || '').trim());
+
+/** Categories are driven by each campaign's own badge — there's no separate taxonomy to maintain. */
+export const getCategories = () =>
+  [...new Set(getAllCampaigns().map((c) => c.badge))].sort((a, b) => a.localeCompare(b, 'pt-BR'));
+
+export const SORT_OPTIONS = [
+  { value: 'populares', label: 'Populares' },
+  { value: 'prazo', label: 'Terminando em breve' },
+  { value: 'preco-menor', label: 'Menor preço' },
+  { value: 'preco-maior', label: 'Maior preço' },
+];
+
+function normalizeText(value) {
+  return String(value)
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '');
+}
+
+function parseDaysRemaining(time) {
+  const match = String(time).match(/\d+/);
+  return match ? Number(match[0]) : Infinity;
+}
+
+function parsePrice(price) {
+  const match = String(price).replace(/\./g, '').match(/\d+(,\d+)?/);
+  return match ? Number(match[0].replace(',', '.')) : 0;
+}
+
+const sorters = {
+  prazo: (a, b) => parseDaysRemaining(a.time) - parseDaysRemaining(b.time),
+  'preco-menor': (a, b) => parsePrice(a.price) - parsePrice(b.price),
+  'preco-maior': (a, b) => parsePrice(b.price) - parsePrice(a.price),
+  populares: (a, b) => (Number(b.progress) || 0) - (Number(a.progress) || 0),
+};
+
+/** Powers the header search bar and "/search" results page: free-text term (matched against title,
+ * creator and category), an optional exact category filter, and a sort order. */
+export function searchCampaigns({ term = '', category = '', sort = 'populares' } = {}) {
+  const normalizedTerm = normalizeText(term.trim());
+
+  const results = getAllCampaigns().filter((c) => {
+    const matchesTerm = !normalizedTerm
+      || normalizeText(c.title).includes(normalizedTerm)
+      || normalizeText(c.creator).includes(normalizedTerm)
+      || normalizeText(c.badge).includes(normalizedTerm);
+    const matchesCategory = !category || c.badge === category;
+    return matchesTerm && matchesCategory;
+  });
+
+  return results.sort(sorters[sort] || sorters.populares);
+}
